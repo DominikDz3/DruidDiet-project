@@ -1,0 +1,296 @@
+/* nordic.css */
+
+/* Import czcionek z Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Open+Sans:wght@400;700&display=swap');
+
+/* Podstawowe style - CZCIONKA DLA WSZYSTKICH ELEMENTÓW */
+body {
+    font-family: 'Metal Mania', cursive; /* Używamy 'Metal Mania' dla całego body */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Jasne tło */
+    color: #333;
+}
+
+/* Zmieniamy kolor tekstu głównego na ciemniejszy, aby był czytelny */
+p {
+    font-family: 'Open Sans', sans-serif; /* Używamy Open Sans dla czytelności w paragrafach */
+    color: #555;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Metal Mania', cursive;
+    color: #4a6b5a; /* Ten sam odcień zieleni dla wszystkich nagłówków */
+}
+
+/* Nagłówek */
+header {
+    background-color: #fff;
+    color: #4a6b5a;
+    padding: 1rem 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #4a6b5a; /* Ten sam odcień zieleni */
+}
+
+header nav ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+header nav a {
+    color: #4a6b5a; /* Ten sam odcień zieleni */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #8b5a2b; /* Pozostawiamy brązowy hover dla kontrastu */
+}
+
+.login-button {
+    background-color: #8b5a2b;
+    color: #fff !important;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #6b4320;
+}
+
+/* Sekcja Hero */
+.hero {
+    background: url('../img/forest_background.jpg') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+    background-color: #4a6b5a; /* Ten sam odcień zieleni na banerze */
+    background-blend-mode: overlay;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #eee;
+}
+
+.button {
+    display: inline-block;
+    background-color: #8b5a2b;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #6b4320;
+    transform: scale(1.05);
+}
+
+/* Sekcja O nas */
+.about {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.about h3 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #4a6b5a; /* Ten sam odcień zieleni */
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    max-width: 300px;
+    text-align: center;
+}
+
+.feature img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.feature h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #4a6b5a; /* Zmieniamy na ten sam odcień zieleni */
+}
+
+/* Sekcja Diety */
+.diets {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.diets h3 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #4a6b5a; /* Ten sam odcień zieleni */
+}
+
+.diet-plans {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.diet-plan {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    text-align: center;
+}
+
+.diet-plan h4 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #4a6b5a; /* Ten sam odcień zieleni */
+}
+
+.button-secondary {
+    display: inline-block;
+    background-color: #4a6b5a; /* Ten sam odcień zieleni */
+    color: #fff !important;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+}
+
+.button-secondary:hover {
+    background-color: #354c3f; /* Ciemniejszy odcień zieleni na hover */
+    transform: scale(1.05);
+}
+
+/* Sekcja Catering */
+.catering {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.catering h3 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #4a6b5a; /* Ten sam odcień zieleni */
+}
+
+.catering p {
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+}
+
+.catering-options {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.catering-option {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    text-align: center;
+}
+
+.catering-option h4 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #4a6b5a; /* Zmieniamy na ten sam odcień zieleni */
+}
+
+/* Stopka */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav ul li {
+        display: block;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .features, .diet-plans, .catering-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature, .diet-plan, .catering-option {
+        margin-bottom: 20px;
+    }
+}
