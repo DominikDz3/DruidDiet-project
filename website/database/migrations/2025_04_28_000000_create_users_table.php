@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('name', 30);
             $table->string('surname', 50);
             $table->string('role', 15);
-            $table->string('TOTP_secret', 50);
-            $table->decimal('loyalty_points', 10, 0);
+            $table->string('TOTP_secret', 50)->nullable();
+            $table->decimal('loyalty_points', 10, 0)->nullable();
             $table->text('allergens')->nullable();
         });
     }

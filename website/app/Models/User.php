@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class User extends Model
+class User extends Authenticatable
 {
     protected $primaryKey = 'user_id';
     public $timestamps = false;
@@ -14,6 +14,10 @@ class User extends Model
     protected $fillable = [
         'email', 'password', 'name', 'surname', 'role',
         'TOTP_secret', 'loyalty_points', 'allergens'
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
     ];
 
     public function coupons(): HasMany

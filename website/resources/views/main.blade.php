@@ -5,21 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DruidDiet - Odżywianie w Zgodzie z Naturą</title>
     <link rel="stylesheet" href="{{ asset('css/nordic.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>DruidDiet</h1>
         <nav>
-            <ul>
-                <li><a href="#">O nas</a></li>
-                <li><a href="#">Diety</a></li>
-                <li><a href="#">Przepisy</a></li>
-                <li><a href="#catering-section">Catering</a></li>
-                <li><a href="#">Kontakt</a></li>
-                <li><a href="#" class="login-button">Zaloguj</a></li>
-            </ul>
-        </nav>
+    <ul>
+        <li><a href="#">O nas</a></li>
+        <li><a href="#">Diety</a></li>
+        <li><a href="#catering-section">Catering</a></li>
+        <li><a href="#">Kontakt</a></li>
+
+        @if(Auth::check() && Auth::user()->role === 'user')
+            <li><span>Witaj, {{ Auth::user()->name }}</span></li>
+            <li><a href="{{ route('user.dashboard') }}" class="login-button">Panel klienta</a></li>
+        @elseif(!Auth::check())
+            <li><a href="{{ route('login') }}" class="login-button">Zaloguj się</a></li>
+        @endif
+    </ul>
+</nav>
+
     </header>
 
     <main>
