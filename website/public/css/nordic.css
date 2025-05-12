@@ -13,12 +13,10 @@ body {
 }
 
 p {
-    font-family: 'Raleway', sans-serif;
     color: #555;
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Raleway', cursive;
     color: #4a6b5a;
 }
 
@@ -39,7 +37,7 @@ h1, h2, h3, h4 {
     color: #4a6b5a !important;
 }
 
-/* Nagłówek */
+/* Navbar */
 header {
     background-color: #fff;
     color: #4a6b5a;
@@ -52,7 +50,7 @@ header {
     padding: 1rem 20px;
 }
 
-header h1 {
+header h1{
     margin: 0;
     font-size: 2.5rem;
     color: #4a6b5a; 
@@ -69,15 +67,37 @@ header nav ul li {
     margin-left: 20px;
 }
 
-header nav a {
+header nav a{
     color: #4a6b5a;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
+.home-btn a {
+    color: #4a6b5a;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.home-btn a:hover {
+    color: #8b5a2b !important;
+}
+
 header nav a:hover {
-    color: #8b5a2b;
+    color: transparent;
+}
+
+.login-button {
+    color: #fff !important;
+}
+
+a:active {
+    background-color: transparent !important;
+}
+
+a:hover {
+    color: #fff !important;
 }
 
 .login-button {
@@ -90,6 +110,81 @@ header nav a:hover {
 
 .login-button:hover {
     background-color: #6b4320;
+}
+
+.btn-outline-secondary {
+    color: #4a6b5a !important;
+}
+
+.btn-outline-secondary:hover {
+    color: #8b5a2b !important;
+    background-color: transparent !important;
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dropdown {
+    position: relative;
+    list-style: none;
+
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+}
+
+.dropdown-item:hover {
+    color: #8b5a2b !important;
+}
+
+.user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #222;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    z-index: 100;
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu a,
+.dropdown-logout-btn {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: none;
+    border: none;
+    text-align: left;
+}
+.dropdown-logout-btn:hover {
+    background-color: #444;
+}
+
+.dropdown.show .dropdown-menu {
+    display: block;
 }
 
 /* Sekcja Hero */
@@ -365,4 +460,30 @@ footer {
 
 .auth-form .auth-switch a:hover {
     text-decoration: underline;
+}
+
+/* user dashboard */
+.user-dashboard .list-group-item {
+    border: none;
+    background-color: #ffffff;
+    color: #2c2c2c;
+    transition: background-color 0.2s ease;
+    font-family: 'Roboto', sans-serif;
+}
+
+.user-dashboard .list-group-item:hover {
+    color: #6b4320 !important;
+}
+
+.user-dashboard .active-custom {
+    background-color: #4a6b5a;
+    color: #fff;
+}
+
+.user-dashboard .list-group-item i {
+    opacity: 0.7;
+}
+
+.user-dashboard a:hover {
+    color: rgb(19, 19, 19) !important;
 }

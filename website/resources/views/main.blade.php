@@ -5,27 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DruidDiet - Odżywianie w Zgodzie z Naturą</title>
     <link rel="stylesheet" href="{{ asset('css/nordic.css') }}">
-    <link href="@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>DruidDiet</h1>
-        <nav>
-    <ul>
-        <li><a href="#">O nas</a></li>
-        <li><a href="#">Diety</a></li>
-        <li><a href="#catering-section">Catering</a></li>
-        <li><a href="#">Kontakt</a></li>
+    <header class="bg-light shadow-sm border-bottom">
+            <h1 class="m-0">DruidDiet</h1>
+            <nav class="d-flex align-items-center gap-4">
+                <ul class="nav gap-3 mb-0">
+                    <li class="nav-item"><a href="#">O nas</a></li>
+                    <li class="nav-item"><a href="#">Diety</a></li>
+                    <li class="nav-item"><a href="#catering-section">Catering</a></li>
+                    <li class="nav-item"><a href="#">Kontakt</a></li>
+                </ul>
 
-        @if(Auth::check() && Auth::user()->role === 'user')
-            <li><span>Witaj, {{ Auth::user()->name }}</span></li>
-            <li><a href="{{ route('user.dashboard') }}" class="login-button">Panel klienta</a></li>
-        @elseif(!Auth::check())
-            <li><a href="{{ route('login') }}" class="login-button">Zaloguj się</a></li>
-        @endif
-    </ul>
-</nav>
-
+                @auth
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">Konto</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">Moje zamówienia</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">Ustawienia</a></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">Wyloguj</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="button login-button">Zaloguj się</a>
+                @endauth
+            </nav>
     </header>
 
     <main>
@@ -37,69 +51,71 @@
             </div>
         </section>
 
-        <section class="about">
+        <section class="about mb-5">
             <h3>Nasza Filozofia</h3>
             <p>W DruidDiet wierzymy w powrót do korzeni – do naturalnych, nieprzetworzonych produktów. Nasze diety czerpią inspirację z obfitości lasów, pól i rzek, by dostarczyć Twojemu organizmowi wszystkiego, czego potrzebuje do pełni zdrowia i witalności.</p>
-            <div class="features">
-                <div class="feature">
-                    <img src="{{ asset('img/leaf.png') }}" alt="Liść">
+            <div class="row text-center mt-4">
+                <div class="col-md-4">
+                    <img src="{{ asset('img/leaf.png') }}" alt="Liść" class="mb-2" style="height: 64px;">
                     <h4>Naturalne Składniki</h4>
                     <p>Stawiamy na produkty pochodzące prosto z natury, bez sztucznych dodatków i konserwantów.</p>
                 </div>
-                <div class="feature">
-                    <img src="{{ asset('img/tree.png') }}" alt="Drzewo">
+                <div class="col-md-4">
+                    <img src="{{ asset('img/tree.png') }}" alt="Drzewo" class="mb-2" style="height: 64px;">
                     <h4>Zrównoważony Rozwój</h4>
                     <p>Dbamy o środowisko, wybierając dostawców, którzy podzielają nasze wartości.</p>
                 </div>
-                <div class="feature">
-                    <img src="{{ asset('img/sun.png') }}" alt="Słońce">
+                <div class="col-md-4">
+                    <img src="{{ asset('img/sun.png') }}" alt="Słońce" class="mb-2" style="height: 64px;">
                     <h4>Energia Słońca i Ziemi</h4>
                     <p>Nasze posiłki dostarczają energii, której potrzebujesz do aktywnego życia.</p>
                 </div>
             </div>
         </section>
 
-        <section class="diets">
+        <section class="diets mb-5">
             <h3>Nasze Diety</h3>
-            <div class="diet-plans">
-                <div class="diet-plan">
+            <div class="row text-center mt-4">
+                <div class="col-md-4">
                     <h4>Dieta Leśnego Druida</h4>
                     <p>Bogata w warzywa leśne, grzyby, orzechy i jagody.</p>
-                    <a href="#" class="button-secondary">Zobacz plan</a>
+                    <a href="#" class="button">Zobacz plan</a>
                 </div>
-                <div class="diet-plan">
+                <div class="col-md-4">
                     <h4>Dieta Rzecznego Wojownika</h4>
                     <p>Opiera się na rybach, owocach morza i roślinach wodnych.</p>
-                    <a href="#" class="button-secondary">Zobacz plan</a>
+                    <a href="#" class="button">Zobacz plan</a>
                 </div>
-                <div class="diet-plan">
+                <div class="col-md-4">
                     <h4>Dieta Słonecznego Pielgrzyma</h4>
                     <p>Skupia się na zbożach, warzywach okopowych i owocach sezonowych.</p>
-                    <a href="#" class="button-secondary">Zobacz plan</a>
+                    <a href="#" class="button">Zobacz plan</a>
                 </div>
             </div>
         </section>
 
-        <section class="catering" id="catering-section">
+        <section class="catering mb-5" id="catering-section">
             <h3>DruidDiet Catering</h3>
             <p>Oferujemy również spersonalizowane plany cateringowe, dostosowane do Twoich indywidualnych potrzeb i preferencji. Ciesz się zdrowymi i smacznymi posiłkami, które dostarczymy prosto pod Twoje drzwi.</p>
-            <div class="catering-options">
-                <div class="catering-option">
+            <div class="row mt-4 text-center">
+                <div class="col-md-6">
                     <h4>Catering Indywidualny</h4>
                     <p>Dostosowana dieta do Twojego stylu życia i celów.</p>
-                    <a href="#" class="button-secondary">Dowiedz się więcej</a>
+                    <a href="#" class="button">Dowiedz się więcej</a>
                 </div>
-                <div class="catering-option">
+                <div class="col-md-6">
                     <h4>Catering Firmowy</h4>
                     <p>Zdrowe posiłki dla pracowników Twojej firmy.</p>
-                    <a href="#" class="button-secondary">Dowiedz się więcej</a>
+                    <a href="#" class="button">Dowiedz się więcej</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="text-center py-4 border-top">
         <p>&copy; 2025 DruidDiet. Wszelkie prawa zastrzeżone.</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
