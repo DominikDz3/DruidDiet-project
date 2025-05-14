@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DietController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/register', 'register')->name('register');
     Route::post('/auth/register', 'store')->name('register.store');
 });
+
+// Ścieżka do wyświetlania listy diet
+Route::get('/diety', [DietController::class, 'index'])->name('diets.index');
 
 // Trasy dostępne tylko po zalogowaniu
 Route::middleware(['auth'])->group(function () {

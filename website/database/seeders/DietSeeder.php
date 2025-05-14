@@ -26,11 +26,7 @@ class DietSeeder extends Seeder
             'description' => '',
             'type' => 'dieta białkowa',
             'calories' => 3000,
-            'elements' => '
-                            Twaróg z dodatkiem owoców i orzechów, 
-                            Chrupiący kurczak w sosie Sweet Chili, 
-                            Zupa Tikka Masala
-                          ',
+            'elements' => 'Twaróg z dodatkiem owoców i orzechów, Chrupiący kurczak w sosie Sweet Chili, Zupa Tikka Masala',
             'price' => 49.00,
             'photo' => '',
             'allergens' => 'laktoza'
