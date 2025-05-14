@@ -1,10 +1,10 @@
 /* nordic.css */
 
 /* Import czcionek z Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 body {
-    font-family: 'Raleway', cursive;
+    font-family: "Raleway", cursive;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -16,7 +16,10 @@ p {
     color: #555;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     color: #4a6b5a;
 }
 
@@ -50,10 +53,10 @@ header {
     padding: 1rem 20px;
 }
 
-header h1{
+header h1 {
     margin: 0;
     font-size: 2.5rem;
-    color: #4a6b5a; 
+    color: #4a6b5a;
 }
 
 header nav ul {
@@ -67,7 +70,7 @@ header nav ul li {
     margin-left: 20px;
 }
 
-header nav a{
+header nav a {
     color: #4a6b5a;
     text-decoration: none;
     font-weight: bold;
@@ -131,7 +134,6 @@ a:hover {
 .dropdown {
     position: relative;
     list-style: none;
-
 }
 
 .dropdown-toggle {
@@ -189,7 +191,8 @@ a:hover {
 
 /* Sekcja Hero */
 .hero {
-    background: url('../img/forest_background.jpg') no-repeat center center/cover;
+    background: url("../img/forest_background.jpg") no-repeat center
+        center/cover;
     color: #fff;
     text-align: center;
     padding: 100px 20px;
@@ -199,7 +202,7 @@ a:hover {
 }
 
 .hero::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -394,12 +397,16 @@ footer {
         margin-bottom: 10px;
     }
 
-    .features, .diet-plans, .catering-options {
+    .features,
+    .diet-plans,
+    .catering-options {
         flex-direction: column;
         align-items: center;
     }
 
-    .feature, .diet-plan, .catering-option {
+    .feature,
+    .diet-plan,
+    .catering-option {
         margin-bottom: 20px;
     }
 }
@@ -412,7 +419,7 @@ footer {
     background-color: #fff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -439,7 +446,7 @@ footer {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 .auth-form .error {
@@ -468,7 +475,7 @@ footer {
     background-color: #ffffff;
     color: #2c2c2c;
     transition: background-color 0.2s ease;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .user-dashboard .list-group-item:hover {
