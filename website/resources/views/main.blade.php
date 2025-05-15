@@ -16,7 +16,7 @@
                 <ul class="nav gap-3 mb-0">
                     <li class="nav-item"><a href="#">O nas</a></li>
                     <li class="nav-item"><a href="{{ route('diets.index') }}">Diety</a></li>
-                    <li class="nav-item"><a href="#catering-section">Catering</a></li>
+                    <li class="nav-item"><a href="{{ route('caterings.index') }}">Katering</a></li>
                     <li class="nav-item"><a href="#">Kontakt</a></li>
                 </ul>
 
@@ -54,7 +54,7 @@
 
         <section class="about mb-5">
             <h3>Nasza Filozofia</h3>
-            <p>W DruidDiet wierzymy w powrót do korzeni – do naturalnych, nieprzetworzonych produktów. Nasze diety czerpią inspirację z obfitości lasów, pól i rzek, by dostarczyć Twojemu organizmowi wszystkiego, czego potrzebuje do pełni zdrowia i witalności.</p>
+            <p>W DruidDiet wierzymy w powrót do korzeni  do naturalnych, nieprzetworzonych produktów. Nasze diety czerpią inspirację z obfitości lasów, pól i rzek, by dostarczyć Twojemu organizmowi wszystkiego, czego potrzebuje do pełni zdrowia i witalności.</p>
             <div class="row text-center mt-4">
                 <div class="col-md-4">
                     <img src="{{ asset('img/leaf.png') }}" alt="Liść" class="mb-2" style="height: 64px;">
@@ -96,16 +96,16 @@
         </section>
 
         <section class="catering mb-5" id="catering-section">
-            <h3>DruidDiet Catering</h3>
-            <p>Oferujemy również spersonalizowane plany cateringowe, dostosowane do Twoich indywidualnych potrzeb i preferencji. Ciesz się zdrowymi i smacznymi posiłkami, które dostarczymy prosto pod Twoje drzwi.</p>
+            <h3>DruidDiet Katering</h3>
+            <p>Oferujemy również spersonalizowane plany kateringowe, dostosowane do Twoich indywidualnych potrzeb i preferencji. Ciesz się zdrowymi i smacznymi posiłkami, które dostarczymy prosto pod Twoje drzwi.</p>
             <div class="row mt-4 text-center">
                 <div class="col-md-6">
-                    <h4>Catering Indywidualny</h4>
+                    <h4>Katering Indywidualny</h4>
                     <p>Dostosowana dieta do Twojego stylu życia i celów.</p>
                     <a href="#" class="button">Dowiedz się więcej</a>
                 </div>
                 <div class="col-md-6">
-                    <h4>Catering Firmowy</h4>
+                    <h4>Katering Firmowy</h4>
                     <p>Zdrowe posiłki dla pracowników Twojej firmy.</p>
                     <a href="#" class="button">Dowiedz się więcej</a>
                 </div>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DietController;
 use App\Http\Controllers\UserOrdersController;
-
+use App\Http\Controllers\CateringController;
 
 
 
@@ -20,6 +20,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/logout', 'logout')->name('logout');
     Route::get('/auth/register', 'register')->name('register');
     Route::post('/auth/register', 'store')->name('register.store');
+
+    Route::get('/caterings', [CateringController::class, 'index'])->name('caterings.index');
 });
 
 // Ścieżka do wyświetlania listy diet
