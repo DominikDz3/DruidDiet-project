@@ -15,6 +15,8 @@ class Catering extends Model
         'price', 'photo', 'allergens'
     ];
 
+    protected $casts = ['photo' => 'string'];
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'catering_id', 'catering_id');

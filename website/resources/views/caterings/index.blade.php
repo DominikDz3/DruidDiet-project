@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nasze Diety - DruidDiet</title>
+    <title>Nasze Kateringi - DruidDiet</title>
     <link rel="stylesheet" href="{{ asset('css/nordic.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .diet-card {
+        .catering-card {
             border: 1px solid #e9ecef;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             background-color: #fff;
         }
-        .diet-card:hover {
+        .catering-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
         }
-        .diet-card .card-img-top {
+        .catering-card .card-img-top {
             height: 200px;
             object-fit: cover;
         }
@@ -132,7 +132,7 @@
                 <ul class="nav gap-3 mb-0">
                     <li class="nav-item"><a href="{{ route('home') }}">O nas</a></li>
                     <li class="nav-item"><a href="{{ route('diets.index') }}">Diety</a></li>
-                    <li class="nav-item"><a href="{{ route('home') }}#catering-section">Katering</a></li>
+                    <li class="nav-item"><a href="{{  route('caterings.index') }}">Katering</a></li>
                     <li class="nav-item"><a href="#">Kontakt</a></li>
                 </ul>
                 @auth
@@ -170,35 +170,26 @@
 
         <section class="filters-and-sort border rounded shadow-sm" id="filtersAndSortSection">
             <div class="filters-and-sort-content p-3">
-                <form method="GET" action="{{ route('diets.index') }}" class="row g-3 align-items-start">
+                <form method="GET" action="{{ route('caterings.index') }}" class="row g-3 align-items-start">
                     <div class="col-12" id="filterOptionsContainer">
-                        <h5 class="mb-3" style="color: #4a6b5a;">Filtruj Diety</h5>
+                        <h5 class="mb-3" style="color: #4a6b5a;">Filtruj Kateringi</h5>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label range-label">Kalorie: <span id="min_calories_value" class="range-value-display">{{ $currentFilters['min_calories'] ?? 500 }}</span> - <span id="max_calories_value" class="range-value-display">{{ $currentFilters['max_calories'] ?? 4000 }}</span> kcal</label>
+                                <label class="form-label range-label">Cena: <span id="min_price_value" class="range-value-display">{{ number_format(floatval($currentFilters['min_price'] ?? 500), 2) }}</span> - <span id="max_price_value" class="range-value-display">{{ number_format(floatval($currentFilters['max_price'] ?? 3000), 2) }}</span> zł</label>
                                 <div class="d-flex gap-2">
-                                    <input type="range" class="form-range" id="min_calories_range" min="500" max="4000" step="50" value="{{ $currentFilters['min_calories'] ?? 500 }}">
-                                    <input type="range" class="form-range" id="max_calories_range" min="500" max="4000" step="50" value="{{ $currentFilters['max_calories'] ?? 4000 }}">
+                                    <input type="range" class="form-range" id="min_price_range" min="500" max="3000" step="50" value="{{ $currentFilters['min_price'] ?? 500 }}">
+                                    <input type="range" class="form-range" id="max_price_range" min="500" max="3000" step="50" value="{{ $currentFilters['max_price'] ?? 3000 }}">
                                 </div>
-                                <input type="hidden" id="min_calories" name="min_calories" value="{{ $currentFilters['min_calories'] ?? 500 }}">
-                                <input type="hidden" id="max_calories" name="max_calories" value="{{ $currentFilters['max_calories'] ?? 4000 }}">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label range-label">Cena: <span id="min_price_value" class="range-value-display">{{ number_format(floatval($currentFilters['min_price'] ?? 20), 2) }}</span> - <span id="max_price_value" class="range-value-display">{{ number_format(floatval($currentFilters['max_price'] ?? 300), 2) }}</span> zł</label>
-                                <div class="d-flex gap-2">
-                                    <input type="range" class="form-range" id="min_price_range" min="20" max="300" step="5" value="{{ $currentFilters['min_price'] ?? 20 }}">
-                                    <input type="range" class="form-range" id="max_price_range" min="20" max="300" step="5" value="{{ $currentFilters['max_price'] ?? 300 }}">
-                                </div>
-                                <input type="hidden" id="min_price" name="min_price" value="{{ $currentFilters['min_price'] ?? 20 }}">
-                                <input type="hidden" id="max_price" name="max_price" value="{{ $currentFilters['max_price'] ?? 300 }}">
+                                <input type="hidden" id="min_price" name="min_price" value="{{ $currentFilters['min_price'] ?? 500 }}">
+                                <input type="hidden" id="max_price" name="max_price" value="{{ $currentFilters['max_price'] ?? 3000 }}">
                             </div>
                             <div class="col-md-12 mt-3">
-                                <label for="diet_type" class="form-label">Typ Diety:</label>
-                                <select class="form-select form-select-sm" id="diet_type" name="diet_type">
-                                    <option value="all" {{ ($currentFilters['diet_type'] ?? 'all') == 'all' ? 'selected' : '' }}>Wszystkie typy</option>
-                                    @if(isset($dietTypes) && $dietTypes->isNotEmpty())
-                                        @foreach($dietTypes as $type)
-                                            <option value="{{ $type }}" {{ ($currentFilters['diet_type'] ?? '') == $type ? 'selected' : '' }}>
+                                <label for="catering_type" class="form-label">Typ Kateringu:</label>
+                                <select class="form-select form-select-sm" id="catering_type" name="catering_type">
+                                    <option value="all" {{ ($currentFilters['catering_type'] ?? 'all') == 'all' ? 'selected' : '' }}>Wszystkie typy</option>
+                                    @if(isset($cateringTypes) && $cateringTypes->isNotEmpty())
+                                        @foreach($cateringTypes as $type)
+                                            <option value="{{ $type }}" {{ ($currentFilters['catering_type'] ?? '') == $type ? 'selected' : '' }}>
                                                 {{ htmlspecialchars(ucfirst($type)) }}
                                             </option>
                                         @endforeach
@@ -209,7 +200,7 @@
                     </div>
 
                     <div class="col-12 mt-3" id="sortOptionsContainer">
-                        <h5 class="mb-3" style="color: #4a6b5a;">Sortuj Diety</h5>
+                        <h5 class="mb-3" style="color: #4a6b5a;">Sortuj Kateringi</h5>
                         <div class="row g-3">
                             <div class="col-md-8 col-lg-6">
                                 <label for="sort_option" class="form-label">Sortuj według:</label>
@@ -218,8 +209,6 @@
                                     <option value="title_desc" {{ ($currentFilters['sort_option'] ?? '') == 'title_desc' ? 'selected' : '' }}>Nazwa (Z-A)</option>
                                     <option value="price_asc" {{ ($currentFilters['sort_option'] ?? '') == 'price_asc' ? 'selected' : '' }}>Cena (Rosnąco)</option>
                                     <option value="price_desc" {{ ($currentFilters['sort_option'] ?? '') == 'price_desc' ? 'selected' : '' }}>Cena (Malejąco)</option>
-                                    <option value="calories_asc" {{ ($currentFilters['sort_option'] ?? '') == 'calories_asc' ? 'selected' : '' }}>Kalorie (Rosnąco)</option>
-                                    <option value="calories_desc" {{ ($currentFilters['sort_option'] ?? '') == 'calories_desc' ? 'selected' : '' }}>Kalorie (Malejąco)</option>
                                 </select>
                             </div>
                         </div>
@@ -232,42 +221,41 @@
             </div>
         </section>
 
-        <section class="diets-list mb-5">
-            <h2 class="text-center mb-4" style="color: #4a6b5a;">Dostępne Diety</h2>
+        <section class="caterings-list mb-5">
+            <h2 class="text-center mb-4" style="color: #4a6b5a;">Dostępne Kateringi</h2>
             <div class="row">
-                @if(isset($diets) && $diets->count() > 0)
-                    @foreach ($diets as $diet)
+                @if(isset($caterings) && $caterings->count() > 0)
+                    @foreach ($caterings as $catering)
                         <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100 shadow-sm diet-card">
-                                <img src="https://via.placeholder.com/300x200.png?text={{ urlencode(htmlspecialchars($diet->title ?? 'Dieta')) }}" class="card-img-top" alt="{{ htmlspecialchars($diet->title ?? 'Dieta') }}">
+                            <div class="card h-100 shadow-sm catering-card">
+                                <img src="https://via.placeholder.com/300x200.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Catering')) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title">{{ htmlspecialchars($diet->title ?? 'Brak tytułu') }}</h4>
-                                    <p class="card-text"><small><strong>Typ:</strong> {{ htmlspecialchars($diet->type ?? 'N/A') }}</small></p>
-                                    <p class="card-text"><small><strong>Kalorie:</strong> {{ htmlspecialchars($diet->calories ?? '0') }} kcal</small></p>
+                                    <h4 class="card-title">{{ htmlspecialchars($catering->title ?? 'Brak tytułu') }}</h4>
+                                    <p class="card-text"><small><strong>Typ:</strong> {{ htmlspecialchars($catering->type ?? 'N/A') }}</small></p>
                                     <div style="flex-grow: 1;">
-                                        <p class="card-text">{{ nl2br(htmlspecialchars($diet->description ?? 'Brak opisu.')) }}</p>
-                                        @if (!empty($diet->elements))
-                                        <p class="card-text mt-2"><small><strong>Skład:</strong> {{ htmlspecialchars($diet->elements) }}</small></p>
+                                        <p class="card-text">{{ nl2br(htmlspecialchars($catering->description ?? 'Brak opisu.')) }}</p>
+                                        @if (!empty($catering->elements))
+                                        <p class="card-text mt-2"><small><strong>Skład:</strong> {{ htmlspecialchars($catering->elements) }}</small></p>
                                         @endif
-                                        @if (!empty($diet->allergens))
-                                            <p class="card-text text-danger"><small><strong>Alergeny:</strong> {{ htmlspecialchars($diet->allergens) }}</small></p>
+                                        @if (!empty($catering->allergens))
+                                            <p class="card-text text-danger"><small><strong>Alergeny:</strong> {{ htmlspecialchars($catering->allergens) }}</small></p>
                                         @endif
                                     </div>
-                                    <p class="card-text fw-bold fs-5 mt-auto pt-2 price-tag">{{ htmlspecialchars(number_format($diet->price ?? 0, 2, ',', ' ')) }} zł</p>
-                                    <a href="#" class="btn mt-2 button">Zobacz plan</a>
+                                    <p class="card-text fw-bold fs-5 mt-auto pt-2 price-tag">{{ htmlspecialchars(number_format($catering->price ?? 0, 2, ',', ' ')) }} zł</p>
+                                    <a href="#" class="btn mt-2 button">Zamawiam</a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 @else
                     <div class="col-12">
-                        <p class="text-center">Nie znaleziono diet spełniających wybrane kryteria.</p>
+                        <p class="text-center">Nie znaleziono kateringów spełniających wybrane kryteria.</p>
                     </div>
                 @endif
             </div>
-            @if(isset($diets) && $diets instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator && $diets->total() > 0)
+            @if(isset($caterings) && $caterings instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator && $caterings->total() > 0)
                 <div class="d-flex justify-content-center mt-4">
-                    {{ $diets->withQueryString()->links() }}
+                    {{ $caterings->withQueryString()->links() }}
                 </div>
             @endif
         </section>
@@ -313,11 +301,7 @@
                 maxDisplayEl.textContent = decimalPlaces > 0 ? parseFloat(maxRangeEl.value).toFixed(decimalPlaces) : parseInt(maxRangeEl.value);
             }
 
-            setupRangeSliderPair(
-                document.getElementById('min_calories_range'), document.getElementById('max_calories_range'),
-                document.getElementById('min_calories'), document.getElementById('max_calories'),
-                document.getElementById('min_calories_value'), document.getElementById('max_calories_value'), 0
-            );
+        
             setupRangeSliderPair(
                 document.getElementById('min_price_range'), document.getElementById('max_price_range'),
                 document.getElementById('min_price'), document.getElementById('max_price'),
@@ -357,11 +341,11 @@
 
             const urlParams = new URLSearchParams(window.location.search);
             let isAnyFilterActive = false;
-            const filterParamKeys = ['min_calories', 'max_calories', 'min_price', 'max_price', 'diet_type'];
+            const filterParamKeys = ['min_calories', 'max_calories', 'min_price', 'max_price', 'catering_type'];
             const sortParamKeys = ['sort_option'];
 
             filterParamKeys.forEach(param => {
-                if (urlParams.has(param) && urlParams.get(param) !== '' && (param !== 'diet_type' || urlParams.get(param) !== 'all')) {
+                if (urlParams.has(param) && urlParams.get(param) !== '' && (param !== 'catering_type' || urlParams.get(param) !== 'all')) {
                     isAnyFilterActive = true;
                 }
             });
@@ -375,7 +359,7 @@
                 filtersAndSortSection.classList.add('open');
                 let showFiltersFromUrl = false;
                 filterParamKeys.forEach(param => {
-                    if (urlParams.has(param) && urlParams.get(param) !== '' && (param !== 'diet_type' || urlParams.get(param) !== 'all')) showFiltersFromUrl = true;
+                    if (urlParams.has(param) && urlParams.get(param) !== '' && (param !== 'catering_type' || urlParams.get(param) !== 'all')) showFiltersFromUrl = true;
                 });
                 if (showFiltersFromUrl) filterOptionsContainer.classList.add('visible');
 
