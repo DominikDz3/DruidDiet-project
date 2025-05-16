@@ -132,7 +132,7 @@
                 <ul class="nav gap-3 mb-0">
                     <li class="nav-item"><a href="{{ route('home') }}">O nas</a></li>
                     <li class="nav-item"><a href="{{ route('diets.index') }}">Diety</a></li>
-                    <li class="nav-item"><a href="{{ route('home') }}#catering-section">Katering</a></li>
+                    <li class="nav-item"><a href="{{ route('caterings.index') }}">Katering</a></li>
                     <li class="nav-item"><a href="#">Kontakt</a></li>
                 </ul>
                 @auth

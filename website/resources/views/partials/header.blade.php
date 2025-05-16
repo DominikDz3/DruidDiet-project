@@ -2,9 +2,9 @@
     <h1 class="m-0 home-btn"><a href="{{ route('home') }}" class="text-decoration-none">DruidDiet</a></h1>
             <nav class="d-flex align-items-center gap-4">
                 <ul class="nav gap-3 mb-0">
-                    <li class="nav-item"><a href="#">O nas</a></li>
-                    <li class="nav-item"><a href="#">Diety</a></li>
-                    <li class="nav-item"><a href="#catering-section">Catering</a></li>
+                    <li class="nav-item"><a href="{{  route('home') }}">O nas</a></li>
+                    <li class="nav-item"><a href="{{  route('diets.index') }}">Diety</a></li>
+                    <li class="nav-item"><a href="{{  route('caterings.index') }}">Catering</a></li>
                     <li class="nav-item"><a href="#">Kontakt</a></li>
                 </ul>
 

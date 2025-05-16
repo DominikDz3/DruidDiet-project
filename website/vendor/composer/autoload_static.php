@@ -454,6 +454,7 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         'App\\Http\\Controllers\\CateringController' => __DIR__ . '/../..' . '/app/Http/Controllers/CateringController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DietController' => __DIR__ . '/../..' . '/app/Http/Controllers/DietController.php',
+        'App\\Http\\Controllers\\UserOrdersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserOrdersController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
