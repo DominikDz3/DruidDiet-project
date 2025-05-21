@@ -5,8 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DietController;
 use App\Http\Controllers\UserOrdersController;
 use App\Http\Controllers\CateringController;
-
-
+use App\Http\Controllers\Admin\OrderController as AdminOrderController; // <--- DODAJ TEN IMPORT
 
 // Strona główna
 Route::get('/', function () {
@@ -20,7 +19,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/logout', 'logout')->name('logout');
     Route::get('/auth/register', 'register')->name('register');
     Route::post('/auth/register', 'store')->name('register.store');
-
     Route::get('/caterings', [CateringController::class, 'index'])->name('caterings.index');
 });
 
@@ -34,17 +32,27 @@ Route::middleware(['auth'])->group(function () {
         return view('user.dashboard');
     })->name('user.dashboard');
 
-    // Historia zamówień użytkownika
     Route::get('/user/orders', [UserOrdersController::class, 'index'])->name('user.orders.index');
 
     // Możesz tu później dodać trasę do szczegółów zamówienia
     // Route::get('/user/orders/{order}', [UserOrdersController::class, 'show'])->name('user.orders.show');
 
-    // Panel admina — z dodatkowym sprawdzeniem roli
-    Route::get('/admin/dashboard', function () {
-        if (auth()->user()->role !== 'admin') {
-            abort(403);
-        }
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    
+    Route::middleware(['role:admin']) 
+        ->prefix('admin')          
+        ->name('admin.')          
+        ->group(function () {
+        
+        Route::get('/dashboard', function () {
+            
+            return view('admin.dashboard');
+        })->name('dashboard'); 
+        
+        
+        // CRUD dla Zamówień
+        Route::resource('orders', AdminOrderController::class)->except([
+            // 'create', 'store' // Odkomentuj, jeśli admin nie ma mieć możliwości tworzenia nowych zamówień
+        ]);
+        
+    });
 });

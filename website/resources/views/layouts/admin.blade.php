@@ -25,19 +25,19 @@
 
         <nav class="sidebar">
             <div>
-                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                    Dashboard
-                </a>
-                <a href="" class="nav-link {{ request()->routeIs('admin.users') ? 'active' : '' }}">
-                    Użytkownicy
-                </a>
-                <a href="" class="nav-link {{ request()->routeIs('admin.diets') ? 'active' : '' }}">
-                    Diety
-                </a>
-                <a href="" class="nav-link {{ request()->routeIs('admin.orders') ? 'active' : '' }}">
-                    Zamówienia
-                </a>
-            </div>
+                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}">
+                Dashboard
+            </a>
+            <a href="#" class="nav-link {{-- request()->routeIs('admin.users*') ? 'active' : '' --}}"> {{-- Zaktualizuj, jeśli masz Użytkowników --}}
+                Użytkownicy
+            </a>
+            <a href="#" class="nav-link {{-- request()->routeIs('admin.diets*') ? 'active' : '' --}}"> {{-- Zaktualizuj, jeśli masz Diety --}}
+                Diety
+            </a>
+            <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->routeIs('admin.orders*') ? 'active' : '' }}"> {{-- <--- ZAKTUALIZOWANY LINK --}}
+                Zamówienia
+            </a>
+                        </div>
 
             <div class="sidebar-bottom">
                 <form action="{{ route('logout') }}" method="POST">
