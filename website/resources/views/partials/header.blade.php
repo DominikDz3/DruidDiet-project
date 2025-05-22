@@ -8,6 +8,20 @@
                     <li class="nav-item"><a href="#">Kontakt</a></li>
                 </ul>
 
+
+                <a href="{{ route('cart.index') }}" class="btn btn-outline-secondary position-relative">
+                <i class="bi bi-cart3"></i> Koszyk
+                @php
+                    $cartCount = collect(session('cart', []))->sum('quantity');
+                @endphp
+                @if($cartCount > 0)
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ $cartCount }}
+                        <span class="visually-hidden">przedmiotów w koszyku</span>
+                    </span>
+                @endif
+                </a>
+
                 @auth
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
