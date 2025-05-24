@@ -6,8 +6,9 @@ use App\Http\Controllers\DietController;
 use App\Http\Controllers\UserOrdersController;
 use App\Http\Controllers\CateringController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\AdminUsersController as AdminUserController; // Dodajemy UserController
+use App\Http\Controllers\Admin\AdminUsersController as AdminUserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserProfileController;
 
 // Strona główna
 Route::get('/', function () {
@@ -37,31 +38,26 @@ Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear')
 
 // Trasy dostępne tylko po zalogowaniu
 Route::middleware(['auth'])->group(function () {
-    // Panel użytkownika
-    Route::get('/user/dashboard', function () {
-        return view('user.dashboard');
-    })->name('user.dashboard');
-
+    Route::get('/user/dashboard', [UserProfileController::class, 'edit'])->name('user.dashboard');
     Route::get('/user/orders', [UserOrdersController::class, 'index'])->name('user.orders.index');
-
+    Route::put('/user/profile/update', [UserProfileController::class, 'update'])->name('user.profile.update');
 
     Route::middleware(['role:admin'])
         ->prefix('admin')
         ->name('admin.')
         ->group(function () {
 
-        Route::get('/dashboard', function () {
+        Route::get('/dashboard', function () { 
             return view('admin.dashboard');
         })->name('dashboard');
 
 
         // CRUD dla Zamówień
         Route::resource('orders', AdminOrderController::class)->except([
-            // 'create', 'store' // Odkomentuj, jeśli admin nie ma mieć możliwości tworzenia nowych zamówień
         ]);
 
         // CRUD dla Użytkowników
-        Route::resource('users', AdminUserController::class); // Dodajemy resource dla użytkowników
+        Route::resource('users', AdminUserController::class);
 
     });
 });
