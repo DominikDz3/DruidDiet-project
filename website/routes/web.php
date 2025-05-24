@@ -5,8 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DietController;
 use App\Http\Controllers\UserOrdersController;
 use App\Http\Controllers\CateringController;
-use App\Http\Controllers\Admin\OrderController as AdminOrderController; 
-use App\Http\Controllers\CartController; 
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\AdminUsersController as AdminUserController; // Dodajemy UserController
+use App\Http\Controllers\CartController;
 
 // Strona główna
 Route::get('/', function () {
@@ -43,22 +44,24 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/user/orders', [UserOrdersController::class, 'index'])->name('user.orders.index');
 
-    
-    Route::middleware(['role:admin']) 
-        ->prefix('admin')          
-        ->name('admin.')          
+
+    Route::middleware(['role:admin'])
+        ->prefix('admin')
+        ->name('admin.')
         ->group(function () {
-        
+
         Route::get('/dashboard', function () {
-            
             return view('admin.dashboard');
-        })->name('dashboard'); 
-        
-        
+        })->name('dashboard');
+
+
         // CRUD dla Zamówień
         Route::resource('orders', AdminOrderController::class)->except([
             // 'create', 'store' // Odkomentuj, jeśli admin nie ma mieć możliwości tworzenia nowych zamówień
         ]);
-        
+
+        // CRUD dla Użytkowników
+        Route::resource('users', AdminUserController::class); // Dodajemy resource dla użytkowników
+
     });
 });
