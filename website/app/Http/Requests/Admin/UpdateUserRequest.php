@@ -14,7 +14,6 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        // Zakładamy, że autoryzacja jest już obsługiwana przez middleware 'role:admin' na trasie
         return true;
     }
 
@@ -25,7 +24,6 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        // $this->user to obiekt User przekazywany przez Route Model Binding
         $userId = $this->user ? $this->user->user_id : null;
 
         return [
@@ -36,9 +34,9 @@ class UpdateUserRequest extends FormRequest
                 'string',
                 'email',
                 'max:50',
-                Rule::unique('users')->ignore($userId, 'user_id') // Ignoruj obecnego użytkownika podczas sprawdzania unikalności emaila
+                Rule::unique('users')->ignore($userId, 'user_id')
             ],
-            'password' => 'nullable|string|min:8|confirmed', // Hasło jest opcjonalne przy edycji
+            'password' => 'nullable|string|min:8|confirmed',
             'role' => ['required', Rule::in(['user', 'admin'])],
             'loyalty_points' => 'nullable|numeric|min:0',
             'allergens' => 'nullable|string',

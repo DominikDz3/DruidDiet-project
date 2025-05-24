@@ -83,8 +83,6 @@
     @enderror
 </div>
 
-{{-- Pole TOTP_secret jest zarządzane osobno, np. przy konfiguracji 2FA przez użytkownika, więc pomijamy je w standardowym formularzu CRUD admina --}}
-
 <div class="mt-4">
     <button type="submit" class="btn btn-primary">{{ isset($user) ? 'Zaktualizuj użytkownika' : 'Utwórz użytkownika' }}</button>
     <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Anuluj</a>

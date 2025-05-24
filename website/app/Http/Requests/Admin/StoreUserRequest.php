@@ -14,7 +14,6 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize()
     {
-        // Zakładamy, że autoryzacja jest już obsługiwana przez middleware 'role:admin' na trasie
         return true;
     }
 
@@ -29,7 +28,7 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|string|max:30',
             'surname' => 'required|string|max:50',
             'email' => 'required|string|email|max:50|unique:users,email',
-            'password' => 'required|string|min:8|confirmed', // 'confirmed' wymaga pola password_confirmation
+            'password' => 'required|string|min:8|confirmed',
             'role' => ['required', Rule::in(['user', 'admin'])],
             'loyalty_points' => 'nullable|numeric|min:0',
             'allergens' => 'nullable|string',

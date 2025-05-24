@@ -14,7 +14,6 @@
         </div>
         <div class="card-body">
             <form action="{{ route('admin.users.store') }}" method="POST">
-                {{-- Zaktualizowana ścieżka do partiala --}}
                 @include('partials.admin_user_form', ['roles' => $roles])
             </form>
         </div>

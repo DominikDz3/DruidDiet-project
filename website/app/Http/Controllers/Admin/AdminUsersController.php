@@ -16,7 +16,7 @@ class AdminUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) // Request standardowy dla pobierania parametrów GET
+    public function index(Request $request)
     {
         $search = $request->input('search');
         $users = User::query()
@@ -48,9 +48,9 @@ class AdminUsersController extends Controller
      * @param  \App\Http\Requests\Admin\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request) // Używamy StoreUserRequest
+    public function store(StoreUserRequest $request)
     {
-        $validatedData = $request->validated(); // Pobieramy zwalidowane dane
+        $validatedData = $request->validated();
 
         $user = new User();
         $user->name = $validatedData['name'];
@@ -60,7 +60,6 @@ class AdminUsersController extends Controller
         $user->role = $validatedData['role'];
         $user->loyalty_points = $validatedData['loyalty_points'] ?? 0;
         $user->allergens = $validatedData['allergens'];
-        // Domyślnie TOTP_secret może pozostać null
 
         $user->save();
 
@@ -75,7 +74,7 @@ class AdminUsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.usersCRUD.show', compact('user')); // Jeśli zdecydujesz się go używać
+        return view('admin.usersCRUD.show', compact('user'));
     }
 
     /**
@@ -97,9 +96,9 @@ class AdminUsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, User $user) // Używamy UpdateUserRequest
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $validatedData = $request->validated(); // Pobieramy zwalidowane dane
+        $validatedData = $request->validated();
 
         $user->name = $validatedData['name'];
         $user->surname = $validatedData['surname'];
