@@ -14,7 +14,6 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    {{-- Formularz wyszukiwania i filtrowania --}}
     <form method="GET" action="{{ route('admin.orders.index') }}" class="mb-4">
         <div class="row">
             <div class="col-md-4">
@@ -89,9 +88,7 @@
                     {{ ucfirst($order->status) }}
                 </span>
             </td>
-            {{-- ZMIANA: Wyrównanie sumy do prawej --}}
             <td class="text-end">{{ number_format($order->total_price, 2, ',', ' ') }} zł</td>
-            {{-- ZMIANA: Wyrównanie akcji do środka --}}
             <td class="text-center">
                 <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-info btn-sm" title="Podgląd">
                     <i class="bi bi-eye-fill"></i> Podgląd
