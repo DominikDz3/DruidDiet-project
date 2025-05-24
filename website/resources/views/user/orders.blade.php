@@ -13,7 +13,7 @@
                     <a href="{{ route('user.orders.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('user.orders.index') ? 'active-custom' : '' }}">
                         <i class="bi bi-basket me-2"></i> Zamówienia
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action"> {{-- TODO: link do ustawień --}}
+                    <a href="#" class="list-group-item list-group-item-action">
                         <i class="bi bi-gear me-2"></i> Ustawienia konta
                     </a>
                     <form method="POST" action="{{ route('logout') }}">

@@ -494,3 +494,18 @@ footer {
 .user-dashboard a:hover {
     color: rgb(19, 19, 19) !important;
 }
+
+.list-group-item.active-custom {
+    background-color: #4a6b5a !important;
+    border-color: #4f772d !important;
+    color: #fff !important;
+}
+.form-control-plaintext {
+    padding-top: .375rem;
+    padding-bottom: .375rem;
+    margin-bottom: 0;
+    line-height: 1.5;
+    background-color: transparent;
+    border: solid transparent;
+    border-width: 1px 0;
+}
