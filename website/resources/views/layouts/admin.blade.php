@@ -29,8 +29,11 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                     </a>
-                    <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}"> {{-- Zaktualizowany link i warunek active --}}
+                    <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
                         <i class="fas fa-users me-2"></i> Użytkownicy
+                    </a>
+                    <a href="{{ route('admin.coupons.index') }}" class="nav-link {{ request()->routeIs('admin.coupons*') ? 'active' : '' }}">
+                        <i class="fas fa-tags me-2"></i> Kody Rabatowe
                     </a>
                     <a href="#" class="nav-link {{-- request()->routeIs('admin.diets*') ? 'active' : '' --}}">
                         <i class="fas fa-utensils me-2"></i> Diety
