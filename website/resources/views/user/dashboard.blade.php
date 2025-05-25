@@ -54,8 +54,6 @@
                         </div>
                     @endif
 
-
-                    {{-- Sekcja wyświetlania danych (domyślnie widoczna) --}}
                     <div id="profileDisplaySection">
                         <div class="mb-3 row">
                             <strong class="col-sm-3 col-form-label">Imię:</strong>
@@ -84,8 +82,7 @@
                          <p class="text-muted small mt-4">Aby zmienić hasło, kliknij "Edytuj Profil".</p>
                     </div>
 
-                    {{-- Sekcja formularza edycji (domyślnie ukryta) --}}
-                    <div id="profileEditFormSection" style="display: none;">
+                    <div id="profileEditFormSection" style="display: none;" @if($errors->any()) data-has-errors="true" @else data-has-errors="false" @endif>
                         <form action="{{ route('user.profile.update') }}" method="POST">
                             @csrf
                             @method('PUT')
@@ -159,45 +156,5 @@
 @endsection
 
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const toggleButton = document.getElementById('toggleEditProfileBtn');
-    const cancelButton = document.getElementById('cancelEditBtn');
-    const displaySection = document.getElementById('profileDisplaySection');
-    const formSection = document.getElementById('profileEditFormSection');
-    const cardHeader = toggleButton.closest('.card-header').querySelector('h4');
-
-    let isEditMode = false;
-
-    function toggleMode() {
-        isEditMode = !isEditMode;
-        if (isEditMode) {
-            displaySection.style.display = 'none';
-            formSection.style.display = 'block';
-            toggleButton.innerHTML = '<i class="bi bi-x-circle me-1"></i> Anuluj Edycję';
-            toggleButton.classList.remove('btn-outline-primary');
-            toggleButton.classList.add('btn-outline-danger');
-             cardHeader.textContent = 'Edytuj Swój Profil';
-        } else {
-            displaySection.style.display = 'block';
-            formSection.style.display = 'none';
-            toggleButton.innerHTML = '<i class="bi bi-pencil-square me-1"></i> Edytuj Profil';
-            toggleButton.classList.remove('btn-outline-danger');
-            toggleButton.classList.add('btn-outline-primary');
-            cardHeader.textContent = 'Twój Profil';
-        }
-    }
-
-    toggleButton.addEventListener('click', toggleMode);
-    if (cancelButton) { // Przycisk Anuluj w formularzu
-        cancelButton.addEventListener('click', toggleMode);
-    }
-
-    // Jeśli są błędy walidacji po stronie serwera, formularz powinien być od razu widoczny
-    @if ($errors->any())
-        isEditMode = false; // Ustawiamy tak, aby toggleMode przełączył na tryb edycji
-        toggleMode();
-    @endif
-});
-</script>
+<script src="{{ asset('js/profile-edit.js') }}" defer></script>
 @endpush
