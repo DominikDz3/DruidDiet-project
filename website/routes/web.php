@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\AdminUsersController as AdminUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\Admin\CouponController as AdminCouponController;
 
 // Strona główna
 Route::get('/', function () {
@@ -58,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
 
         // CRUD dla Użytkowników
         Route::resource('users', AdminUserController::class);
+
+        // CRUD dla Kodów Rabatowych
+        Route::resource('coupons', AdminCouponController::class); // Dodajemy resource dla kuponów
 
     });
 });
