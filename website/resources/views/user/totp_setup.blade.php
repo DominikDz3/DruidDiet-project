@@ -6,8 +6,6 @@
 <section class="user-dashboard py-5 container">
     <div class="row">
         <aside class="col-md-3 mb-4">
-            {{-- Twoje menu boczne profilu (skopiuj z dashboard.blade.php lub użyj partiala) --}}
-            {{-- Upewnij się, że link do ustawień 2FA jest aktywny --}}
             <div class="list-group rounded-3 overflow-hidden">
                 <a href="{{ route('user.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('user.dashboard') ? 'active-custom' : '' }}">
                     <i class="bi bi-person-circle me-2"></i> Mój Profil

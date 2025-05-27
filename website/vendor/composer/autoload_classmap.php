@@ -17,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\CateringController' => $baseDir . '/app/Http/Controllers/CateringController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DietController' => $baseDir . '/app/Http/Controllers/DietController.php',
+    'App\\Http\\Controllers\\TOTPController' => $baseDir . '/app/Http/Controllers/TOTPController.php',
     'App\\Http\\Controllers\\UserOrdersController' => $baseDir . '/app/Http/Controllers/UserOrdersController.php',
     'App\\Http\\Controllers\\UserProfileController' => $baseDir . '/app/Http/Controllers/UserProfileController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
