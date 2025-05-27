@@ -13,9 +13,12 @@
                 <a href="{{ route('user.orders.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('user.orders.index') ? 'active-custom' : '' }}">
                     <i class="bi bi-basket me-2"></i> Zamówienia
                 </a>
+                <a href="{{ route('user.myCoupons') }}" class="list-group-item list-group-item-action {{ request()->routeIs('user.myCoupons') ? 'active-custom' : '' }}">
+                    <i class="bi bi-tags me-2"></i> Moje Kody Rabatowe
+                </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                        <i class="bi bi-gear me-2"></i> Ustawienia konta
-                    </a>
+                    <i class="bi bi-gear me-2"></i> Ustawienia konta
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="list-group-item list-group-item-action text-danger">
@@ -29,7 +32,6 @@
             <div class="card shadow-sm rounded-3">
                 <div class="card-header bg-light py-3 d-flex justify-content-between align-items-center">
                     <h4 class="mb-0 fw-bold" style="color: #4a6b5a;">Twój Profil</h4>
-                    {{-- Przycisk Edytuj/Anuluj będzie się zmieniał --}}
                     <button id="toggleEditProfileBtn" class="btn btn-sm btn-outline-primary" style="border-color: #4a6b5a; color: #4a6b5a;">
                         <i class="bi bi-pencil-square me-1"></i> Edytuj Profil
                     </button>
@@ -44,7 +46,7 @@
 
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                             <strong>Wystąpiły błędy:</strong>
+                                <strong>Wystąpiły błędy:</strong>
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -91,7 +93,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="name" class="form-label">Imię <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('name', 'updateProfile') is-invalid @enderror" id="name" name="name" value="{{ old('name', $user->name) }}" required>
-                                    @error('name', 'updateProfile') {{-- Drugi parametr to nazwa error bag --}}
+                                    @error('name', 'updateProfile')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -142,7 +144,6 @@
                             </div>
 
                             <div class="mt-4 d-flex justify-content-end">
-                                {{-- Przycisk Anuluj w formularzu będzie obsługiwany przez JS --}}
                                 <button type="button" id="cancelEditBtn" class="btn btn-outline-secondary me-2">Anuluj</button>
                                 <button type="submit" class="btn btn-primary" style="background-color: #4a6b5a !important; border-color: #4f772d !important;">Zapisz zmiany</button>
                             </div>
