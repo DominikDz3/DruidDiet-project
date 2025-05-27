@@ -12,6 +12,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\CouponController as AdminCouponController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminCateringController;
+use App\Http\Controllers\CalculatorDashboardController;
+
 
 // Strona główna
 Route::get('/', function () {
@@ -48,6 +50,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/user/profile/update', [UserProfileController::class, 'update'])->name('user.profile.update');
 
     Route::get('/user/my-coupons', [UserProfileController::class, 'myCoupons'])->name('user.myCoupons');
+
+    //kalkulatory
+    Route::get('/kalkulatory', [CalculatorDashboardController::class, 'showAllCalculators'])->name('calculators.index');
+    Route::post('/kalkulatory/zapotrzebowanie-wody', [CalculatorDashboardController::class, 'calculateWaterNeed'])->name('calculators.water.calculator.calculate');
 
     Route::middleware(['role:admin'])
         ->prefix('admin')

@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- Używamy tego samego layoutu co dashboard.blade.php --}}
+@extends('layouts.app') 
 
 @section('title', 'Moje Kody Rabatowe - ' . config('app.name'))
 
@@ -15,6 +15,9 @@
                 </a>
                 <a href="{{ route('user.myCoupons') }}" class="list-group-item list-group-item-action {{ request()->routeIs('user.myCoupons') ? 'active-custom' : '' }}">
                     <i class="bi bi-tags me-2"></i> Moje Kody Rabatowe
+                </a>
+                <a href="{{ route('calculators.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('calculators.*') ? 'active-custom' : '' }}">
+                    <i class="bi bi-calculator me-2"></i> Kalkulatory
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-gear me-2"></i> Ustawienia konta

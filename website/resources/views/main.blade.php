@@ -28,6 +28,8 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">Konto</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">Moje zamówienia</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.myCoupons') }}">Kody Rabatowe</a></li>    
+                            <li><a class="dropdown-item" href="{{ route('calculators.index') }}">Kalkulatory</a></li>                        
                             <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">Ustawienia</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
