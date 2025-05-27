@@ -13,9 +13,8 @@
             <h6 class="m-0 font-weight-bold" style="color: #4a6b5a;">Formularz nowego cateringu</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.caterings.store') }}" method="POST">
-                {{-- Ważne: @csrf i @method('PUT') zostały przeniesione do partiala --}}
-                @include('partials.admin_catering_form', ['catering' => new \App\Models\Catering()]) {{-- Przekazujemy pusty model dla formularza tworzenia --}}
+            <form action="{{ route('admin.caterings.store') }}" method="POST" enctype="multipart/form-data">
+                @include('partials.admin_catering_form', ['catering' => new \App\Models\Catering()]) 
             </form>
         </div>
     </div>

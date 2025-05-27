@@ -1,4 +1,4 @@
-@extends('layouts.admin') {{-- Upewnij się, że używasz odpowiedniego layoutu dla admina --}}
+@extends('layouts.admin')
 
 @section('title', 'Zarządzanie Kateringami - Panel Administratora')
 
@@ -27,7 +27,6 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold" style="color: #4a6b5a;">Lista Kateringów</h6>
-            {{-- Formularz wyszukiwania dla cateringów --}}
             <form action="{{ route('admin.caterings.index') }}" method="GET" class="mt-3">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Szukaj po tytule, typie..." value="{{ request('search') }}">
@@ -43,7 +42,7 @@
                 <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead class="table-light" style="border-color: #4a6b5a;">
                         <tr>
-                            <th>ID</th>
+                            <th></th>
                             <th>Tytuł</th>
                             <th>Typ</th>
                             <th>Cena</th>
@@ -61,13 +60,13 @@
                             <td>{{ $catering->type }}</td>
                             <td>{{ number_format($catering->price, 2) }} zł</td>
                             <td>
-                                @if ($catering->photo && file_exists(public_path($catering->photo)))
-                                    <img src="{{ asset($catering->photo) }}" alt="{{ $catering->title }}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;">
+                                @if ($catering->photo && Storage::disk('public_images')->exists($catering->photo))
+                                    <img src="{{ Storage::disk('public_images')->url($catering->photo) }}" alt="{{ $catering->title }}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;">
                                 @else
                                     <img src="https://via.placeholder.com/80x80.png?text=Brak" alt="Brak zdjęcia" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;">
                                 @endif
                             </td>
-                            <td>{{ Str::limit($catering->description, 50) }}</td> {{-- Ogranicz opis --}}
+                            <td>{{ Str::limit($catering->description, 50) }}</td>
                             <td>{{ $catering->allergens ? Str::limit($catering->allergens, 30) : '-' }}</td>
                             <td>
                                 <a href="{{ route('admin.caterings.edit', $catering->catering_id) }}" class="btn btn-sm btn-warning me-1" title="Edytuj">

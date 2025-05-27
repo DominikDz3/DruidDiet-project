@@ -13,10 +13,9 @@
             <h6 class="m-0 font-weight-bold" style="color: #4a6b5a;">Formularz edycji cateringu</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.caterings.update', $catering->catering_id) }}" method="POST">
-                @method('PUT') {{-- Ważne: Laravel potrzebuje PUT dla metody update --}}
-                {{-- Ważne: @csrf zostało przeniesione do partiala --}}
-                @include('partials.admin_catering_form', ['catering' => $catering]) {{-- Przekazujemy istniejący model cateringu --}}
+            <form action="{{ route('admin.caterings.update', $catering->catering_id) }}" method="POST" enctype="multipart/form-data">
+                @method('PUT') 
+                @include('partials.admin_catering_form', ['catering' => $catering]) 
             </form>
         </div>
     </div>

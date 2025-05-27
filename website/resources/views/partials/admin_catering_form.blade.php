@@ -1,4 +1,5 @@
-csrf 
+@csrf
+
 <div class="mb-3">
     <label for="title" class="form-label">Tytuł cateringu</label>
     <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $catering->title ?? '') }}" required>
@@ -36,15 +37,21 @@ csrf
 </div>
 
 <div class="mb-3">
-    <label for="photo" class="form-label">Ścieżka do zdjęcia (np. img/catering1.jpg)</label>
-    @if (!empty($catering->photo)) {{-- Sprawdź, czy catering istnieje i ma zdjęcie --}}
+    <label for="photo" class="form-label">Zdjęcie cateringu</label>
+    @if (!empty($catering->photo))
         <div class="mb-2">
-            <img src="{{ asset($catering->photo) }}" alt="Aktualne zdjęcie" style="max-width: 200px; height: auto; object-fit: cover;">
+            <p>Aktualne zdjęcie:</p>
+            <img src="{{ Storage::disk('public_images')->url($catering->photo) }}" alt="Aktualne zdjęcie" style="max-width: 200px; height: auto; object-fit: cover; border-radius: 4px;">
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="remove_photo" id="remove_photo" value="1">
+            <label class="form-check-label" for="remove_photo">Usuń aktualne zdjęcie</label>
         </div>
     @endif
-    <input type="text" class="form-control" id="photo" name="photo" value="{{ old('photo', $catering->photo ?? '') }}">
+    <input class="form-control" type="file" id="photo" name="photo" accept="image/*">
+    <small class="form-text text-muted">Maksymalny rozmiar: 2MB. Obsługiwane formaty: JPG, PNG, GIF, SVG.</small>
     @error('photo') <div class="text-danger">{{ $message }}</div> @enderror
 </div>
 
-<button type="submit" class="btn btn-primary">Zapisz</button> {{-- Zmieniono tekst na bardziej ogólny --}}
+<button type="submit" class="btn btn-primary">Zapisz</button>
 <a href="{{ route('admin.caterings.index') }}" class="btn btn-secondary">Anuluj</a>

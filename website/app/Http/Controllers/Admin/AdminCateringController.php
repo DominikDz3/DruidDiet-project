@@ -14,9 +14,20 @@ class AdminCateringController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $caterings = Catering::paginate(10); 
+        $query = Catering::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('type', 'like', '%' . $search . '%')
+                  ->orWhere('description', 'like', '%' . $search . '%');
+        }
+
+        $query->orderBy('catering_id', 'desc');
+
+        $caterings = $query->paginate(10);
         return view('admin.cateringsCRUD.index', compact('caterings'));
     }
 
@@ -42,11 +53,17 @@ class AdminCateringController extends Controller
             'title' => 'required|string|max:50',
             'description' => 'required|string',
             'type' => 'required|string|max:50',
-            'elements' => 'nullable|text',
+            'elements' => 'nullable|string',
             'price' => 'required|numeric|min:0|decimal:0,2',
-            'photo' => 'nullable|string|max:255', // Oczekujemy ścieżki tekstowej, np. 'img/catering1.jpg'
-            'allergens' => 'nullable|text',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'allergens' => 'nullable|string',
         ]);
+
+
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photoPath = Storage::disk('public_images')->putFile('', $request->file('photo'));
+        }
 
         Catering::create([
             'title' => $request->title,
@@ -54,53 +71,52 @@ class AdminCateringController extends Controller
             'type' => $request->type,
             'elements' => $request->elements,
             'price' => $request->price,
-            'photo' => $request->photo, // Po prostu zapisz podaną ścieżkę
+            'photo' => $photoPath,
             'allergens' => $request->allergens,
         ]);
 
-        return redirect()->route('admin.cateringsCRUD.index')->with('success', 'Katering dodano pomyślnie!');
+        return redirect()->route('admin.caterings.index')->with('success', 'Katering dodano pomyślnie!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Catering  $catering
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Catering $catering)
     {
         return redirect()->route('admin.cateringsCRUD.edit', $catering);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Catering  $catering
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Catering $catering)
     {
         return view('admin.cateringsCRUD.edit', compact('catering'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Catering  $catering
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Catering $catering)
     {
         $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string',
             'type' => 'required|string|max:50',
-            'elements' => 'nullable|text',
+            'elements' => 'nullable|string',
             'price' => 'required|numeric|min:0|decimal:0,2',
-            'photo' => 'nullable|string|max:255', // Nadal oczekujemy ścieżki tekstowej
-            'allergens' => 'nullable|text',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'allergens' => 'nullable|string',
+            'remove_photo' => 'nullable|boolean',
         ]);
+
+        $photoPath = $catering->photo; 
+
+        if ($request->hasFile('photo')) {
+            if ($catering->photo && Storage::disk('public_images')->exists($catering->photo)) {
+                Storage::disk('public_images')->delete($catering->photo);
+            }
+            $photoPath = Storage::disk('public_images')->putFile('', $request->file('photo'));
+        } elseif ($request->boolean('remove_photo')) {
+            if ($catering->photo && Storage::disk('public_images')->exists($catering->photo)) {
+                Storage::disk('public_images')->delete($catering->photo);
+            }
+            $photoPath = null;
+        }
 
         $catering->update([
             'title' => $request->title,
@@ -108,23 +124,20 @@ class AdminCateringController extends Controller
             'type' => $request->type,
             'elements' => $request->elements,
             'price' => $request->price,
-            'photo' => $request->photo, // Zapisz podaną ścieżkę
+            'photo' => $photoPath,
             'allergens' => $request->allergens,
         ]);
 
-        return redirect()->route('admin.cateringsCRUD.index')->with('success', 'Katering zaktualizowano pomyślnie!');
+        return redirect()->route('admin.caterings.index')->with('success', 'Katering zaktualizowano pomyślnie!');
     
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Catering  $catering
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Catering $catering)
     {
+        if ($catering->photo && Storage::disk('public_images')->exists($catering->photo)) {
+            Storage::disk('public_images')->delete($catering->photo);
+        }
         $catering->delete();
-        return redirect()->route('admin.cateringsCRUD.index')->with('success', 'Katering usunięto pomyślnie!');
+        return redirect()->route('admin.caterings.index')->with('success', 'Katering usunięto pomyślnie!');
     }
 }
