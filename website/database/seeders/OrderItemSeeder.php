@@ -19,7 +19,7 @@ class OrderItemSeeder extends Seeder
     public function run()
     {
         $order1 = Order::first();
-        $item1 = Diet::where('title', 'Dieta Vege')->first();
+        $item1 = Diet::where('title', 'Dieta Vege Klasyczna')->first();
 
         OrderItem::create([
             'order_id' => $order1->order_id,

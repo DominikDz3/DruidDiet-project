@@ -195,15 +195,20 @@
                 @foreach ($caterings as $catering)
                     <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm catering-card">
-                            <img src="https://via.placeholder.com/300x200.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Katering')) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
+                            @if ($catering->photo)
+                                <img src="{{ asset($catering->photo) }}" class="img-fluid" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
+                            @else
+                                <img src="https://via.placeholder.com/800x400.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Katering')) }}" class="img-fluid" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
+                            @endif
                             <div class="card-body d-flex flex-column">
-                                <h4 class="card-title">{{ htmlspecialchars($catering->title ?? 'Brak tytułu') }}</h4>
+                                <h4 class="card-title">
+                                    <a href="{{ route('caterings.show', $catering->catering_id) }}" style="text-decoration: none; color: inherit;">
+                                        {{($catering->title ?? 'Brak tytułu') }}
+                                     </a>
+                                </h4>
                                 <p class="card-text"><small><strong>Typ:</strong> {{ htmlspecialchars($catering->type ?? 'N/A') }}</small></p>
                                 <div style="flex-grow: 1;">
                                     <p class="card-text">{{ nl2br(htmlspecialchars($catering->description ?? 'Brak opisu.')) }}</p>
-                                    @if (!empty($catering->elements))
-                                    <p class="card-text mt-2"><small><strong>Skład:</strong> {{ htmlspecialchars($catering->elements) }}</small></p>
-                                    @endif
                                     @if (!empty($catering->allergens))
                                         <p class="card-text text-danger"><small><strong>Alergeny:</strong> {{ htmlspecialchars($catering->allergens) }}</small></p>
                                     @endif
