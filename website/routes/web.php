@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminUsersController as AdminUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\CouponController as AdminCouponController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
 // Strona główna
 Route::get('/', function () {
@@ -50,9 +51,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('admin.')
         ->group(function () {
 
-        Route::get('/dashboard', function () { 
-            return view('admin.dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
 
         // CRUD dla Zamówień

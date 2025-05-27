@@ -517,3 +517,21 @@ footer {
     background-color: #4a6b5a !important;
     color: white !important;
 }
+
+.chart-area {
+        position: relative;
+        height: 320px;
+        width: 100%;
+    }
+.card.border-left-primary { border-left: .25rem solid #4a6b5a !important; }
+.card.border-left-success { border-left: .25rem solid #5cb85c !important; }
+.card.border-left-info   { border-left: .25rem solid #5bc0de !important; }
+
+@media (max-width: 768px) {
+    .h5, h5 {
+        font-size: 1.1rem;
+        }
+    .text-xs {
+        font-size: .65rem;
+        }
+    }
