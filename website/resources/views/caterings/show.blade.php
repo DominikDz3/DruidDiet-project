@@ -15,7 +15,7 @@
                     <div class="col-md-7">
                         <div class="catering-image-wrapper">
                             @if ($catering->photo)
-                                <img src="{{ asset('storage/' . $catering->photo) }}" class="img-fluid" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
+                                <img src="{{ asset( $catering->photo) }}" class="img-fluid" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
                             @else
                                 <img src="https://via.placeholder.com/800x400.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Katering')) }}" class="img-fluid" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
                             @endif

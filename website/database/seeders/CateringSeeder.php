@@ -21,7 +21,7 @@ class CateringSeeder extends Seeder
             'type' => "Katering impreza",
             'elements' => "Mini kanapki z różnymi pastami, wędlinami i serami, Pizza w różnych wariantach, np. z kurczakiem, pieczarkami, serem, Sałatka (grecka, cezar, z kurczakiem)",
             'price' => 2000,
-            'photo' => "caterings/KateringOsiemnstka.jpg",
+            'photo' => "img/caterings/KateringOsiemnstka.jpg",
             'allergens' => "gluten, laktoza, jaja, soja"
         ]);
         
@@ -41,7 +41,7 @@ class CateringSeeder extends Seeder
             'type' => "Katering plenerowy",
             'elements' => "Grillowane warzywa (papryka, cukinia, bakłażan, ziemniaki), Grillowana pierś kurczaka, Sosy (sos tatarski, sos z suszonymi pomidorami), Pieczone ziemniaki z ziołami i serem",
             'price' => 1000,
-            'photo' => "caterings/KateringGrill.jpg",
+            'photo' => "img/caterings/KateringGrill.jpg",
             'allergens' => "laktoza, gorczyca"
         ]);
 
@@ -141,7 +141,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering biznesowy",
             "elements" => "Wybór kaw speciality (espresso, americano, cappuccino, latte) parzonych przez baristę, Herbaty liściaste premium (czarna, zielona, owocowa, ziołowa), Świeżo wyciskane soki (pomarańczowy, grejpfrutowy, jabłkowy), Mini croissanty z nadzieniem migdałowym i czekoladowym, Financierki, Makaroniki (różne smaki), Panna cotta z musem malinowym w małych słoiczkach, Owoce filetowane (melon, ananas, winogrona, kiwi), Woda z cytryną, miętą i imbirem",
             "price" => 1100, 
-            "photo" => "caterings/PrzerwaKawowaPremiumdlaVIP.jpg",
+            "photo" => "img/caterings/PrzerwaKawowaPremiumdlaVIP.jpg",
             "allergens" => "gluten, laktoza, jaja, orzechy"
         ]);
 
