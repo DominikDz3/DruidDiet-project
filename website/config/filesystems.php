@@ -56,6 +56,15 @@ return [
             'throw' => false,
         ],
 
+        'public_images' => [
+            'driver' => 'local',
+            'root' => public_path('img/caterings'), 
+            'url' => env('APP_URL').'/img/caterings', 
+            'visibility' => 'public', 
+            'throw' => false,
+        ],
+
+
     ],
 
     /*

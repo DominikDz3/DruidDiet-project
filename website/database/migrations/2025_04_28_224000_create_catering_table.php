@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('type', 50);
             $table->text('elements');
             $table->decimal('price', 8, 2);
-            $table->binary('photo');
+            $table->string('photo')->nullable();
             $table->text('allergens')->nullable();
         });
         
