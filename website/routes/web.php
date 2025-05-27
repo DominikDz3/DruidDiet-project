@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/orders', [UserOrdersController::class, 'index'])->name('user.orders.index');
     Route::put('/user/profile/update', [UserProfileController::class, 'update'])->name('user.profile.update');
 
+    Route::get('/user/my-coupons', [UserProfileController::class, 'myCoupons'])->name('user.myCoupons');
+
     Route::middleware(['role:admin'])
         ->prefix('admin')
         ->name('admin.')
@@ -63,7 +65,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('users', AdminUserController::class);
 
         // CRUD dla Kodów Rabatowych
-        Route::resource('coupons', AdminCouponController::class); // Dodajemy resource dla kuponów
-
+        Route::get('coupons/random-user-form', [AdminCouponController::class, 'showRandomUserForm'])->name('coupons.randomUserForm');
+        Route::post('coupons/generate-for-random-user', [AdminCouponController::class, 'generateForRandomUser'])->name('coupons.generateForRandomUser');
+        Route::resource('coupons', AdminCouponController::class);
     });
 });

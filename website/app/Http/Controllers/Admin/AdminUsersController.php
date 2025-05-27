@@ -11,19 +11,15 @@ use App\Http\Requests\Admin\UpdateUserRequest;
 
 class AdminUsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         $search = $request->input('search');
         $users = User::query()
             ->when($search, function ($query, $search) {
                 return $query->where('email', 'like', "%{$search}%")
-                             ->orWhere('name', 'like', "%{$search}%")
-                             ->orWhere('surname', 'like', "%{$search}%");
+                            ->orWhere('name', 'like', "%{$search}%")
+                            ->orWhere('surname', 'like', "%{$search}%");
             })
             ->orderBy('user_id', 'desc')
             ->paginate(10);
@@ -31,23 +27,12 @@ class AdminUsersController extends Controller
         return view('admin.usersCRUD.index', compact('users', 'search'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles = ['user', 'admin'];
         return view('admin.usersCRUD.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\StoreUserRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreUserRequest $request)
     {
         $validatedData = $request->validated();
@@ -66,36 +51,20 @@ class AdminUsersController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'Użytkownik został pomyślnie utworzony.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user)
     {
-        return view('admin.usersCRUD.show', compact('user'));
+        $assignedCoupons = $user->coupons()->orderBy('created_at', 'desc')->get();
+        return view('admin.usersCRUD.show', compact('user', 'assignedCoupons'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         $roles = ['user', 'admin'];
-        return view('admin.usersCRUD.edit', compact('user', 'roles'));
+        $assignedCoupons = $user->coupons()->orderBy('created_at', 'desc')->get();
+
+        return view('admin.usersCRUD.edit', compact('user', 'roles', 'assignedCoupons'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Admin\UpdateUserRequest  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateUserRequest $request, User $user)
     {
         $validatedData = $request->validated();
@@ -116,12 +85,6 @@ class AdminUsersController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'Dane użytkownika zostały pomyślnie zaktualizowane.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
         if (auth()->id() === $user->user_id) {
@@ -132,7 +95,16 @@ class AdminUsersController extends Controller
             $user->delete();
             return redirect()->route('admin.users.index')->with('success', 'Użytkownik został pomyślnie usunięty.');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->route('admin.users.index')->with('error', 'Nie można usunąć użytkownika, ponieważ ma powiązane dane (np. zamówienia). Usuń najpierw powiązane rekordy.');
+            $errorMessage = 'Nie można usunąć użytkownika, ponieważ ma powiązane dane (np. zamówienia, kupony).';
+            if (str_contains($e->getMessage(), 'violates foreign key constraint')) {
+                 if (str_contains($e->getMessage(), 'coupons_user_id_foreign')) {
+                    $errorMessage .= ' Użytkownik ma przypisane kody rabatowe.';
+                } elseif (str_contains($e->getMessage(), 'orders_user_id_foreign')) {
+                    $errorMessage .= ' Użytkownik ma złożone zamówienia.';
+                }
+            }
+            $errorMessage .= ' Usuń najpierw powiązane rekordy lub odłącz je od użytkownika.';
+            return redirect()->route('admin.users.index')->with('error', $errorMessage);
         }
     }
 }
