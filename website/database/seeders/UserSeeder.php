@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
                 'name' => 'Admin',
                 'surname' => 'System',
                 'role' => 'admin',
-                'TOTP_secret' => 'ABC123XYZ',
                 'loyalty_points' => 0,
                 'allergens' => '',
         ]);
@@ -32,7 +31,6 @@ class UserSeeder extends Seeder
                 'name' => 'Anna',
                 'surname' => 'Nowak',
                 'role' => 'user',
-                'TOTP_secret' => 'TOTP456',
                 'loyalty_points' => 30,
                 'allergens' => 'laktoza',
         ]);
@@ -43,7 +41,6 @@ class UserSeeder extends Seeder
                 'name' => 'Jan',
                 'surname' => 'Kowalski',
                 'role' => 'user',
-                'TOTP_secret' => 'TOTP456',
                 'loyalty_points' => 100,
                 'allergens' => 'laktoza, gluten',
         ]);

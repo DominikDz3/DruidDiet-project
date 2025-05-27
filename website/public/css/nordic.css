@@ -578,6 +578,13 @@ footer {
         height: 320px;
         width: 100%;
     }
+
+.active-custom {
+    background-color: #4a6b5a !important;
+    color: white !important;
+    border-color: #4a6b5a !important;
+}
+
 .card.border-left-primary { border-left: .25rem solid #4a6b5a !important; }
 .card.border-left-success { border-left: .25rem solid #5cb85c !important; }
 .card.border-left-info   { border-left: .25rem solid #5bc0de !important; }
