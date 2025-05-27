@@ -10,7 +10,7 @@ class CommentSeeder extends Seeder
 {
     public function run(): void
     {
-        $item1 = Diet::where('title', 'Dieta Vege')->first();
+        $item1 = Diet::where('title', 'Dieta Vege Klasyczna')->first();
 
         Comment::create([
             'user_id' => \App\Models\User::where('email', 'jkowalski@example.com')->first()->user_id,
