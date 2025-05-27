@@ -14,11 +14,15 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="catering-image-wrapper">
-                            <img src="https://via.placeholder.com/800x400.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Katering')) }}" class="img-fluid" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
+                            @if ($catering->photo)
+                                <img src="{{ asset('storage/' . $catering->photo) }}" class="img-fluid" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
+                            @else
+                                <img src="https://via.placeholder.com/800x400.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Katering')) }}" class="img-fluid" alt="{{ htmlspecialchars($catering->title ?? 'Katering') }}">
+                            @endif
                         </div>
 
                         <div class="catering-main-info mt-4">
-                            <h2 class="card-title-detail">{{ htmlspecialchars($catering->title ?? 'Brak tytułu') }}</h2>
+                            <h2 class="card-title-detail">{{ ($catering->title ?? 'Brak tytułu') }}</h2>
                             <p class="text-muted"><small><strong>Typ:</strong> {{ htmlspecialchars($catering->type ?? 'N/A') }}</small></p>
 
                             <h5 class="mt-4" style="color: #4a6b5a;">Opis:</h5>
@@ -26,7 +30,7 @@
 
                             @if (!empty($catering->elements))
                                 <h5 class="mt-4" style="color: #4a6b5a;">Skład:</h5>
-                                <p class="card-text">{{ htmlspecialchars($catering->elements) }}</p>
+                                <p class="card-text">{{ ($catering->elements) }}</p>
                             @endif
 
                             @if (!empty($catering->allergens))

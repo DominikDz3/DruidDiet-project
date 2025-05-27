@@ -15,7 +15,6 @@ class Catering extends Model
         'price', 'photo', 'allergens'
     ];
 
-    protected $casts = ['photo' => 'string'];
 
     public function comments(): HasMany
     {
