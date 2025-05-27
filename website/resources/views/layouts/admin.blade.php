@@ -35,6 +35,9 @@
                     <a href="#" class="nav-link {{-- request()->routeIs('admin.diets*') ? 'active' : '' --}}">
                         <i class="fas fa-utensils me-2"></i> Diety (Wkrótce)
                     </a>
+                    <a href="{{ route('admin.caterings.index') }}" class="nav-link {{ request()->routeIs('admin.caterings*') ? 'active' : '' }}">
+                        <i class="fas fa-box-open me-2"></i> Kateringi
+                    </a>
                     <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->routeIs('admin.orders*') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart me-2"></i> Zamówienia
                     </a>
