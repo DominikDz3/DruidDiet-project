@@ -54,4 +54,15 @@ class CateringController extends Controller
             'currentFilters' => $request->only(['min_price', 'max_price', 'catering_type', 'sort_option'])
         ]);
     }
+
+    /**
+     * Wyświetla szczegóły pojedynczego cateringu.
+     *
+     * @param \App\Models\Catering $catering
+     * @return \Illuminate\View\View
+     */
+    public function show(Catering $catering)
+    {
+        return view('caterings.show', compact('catering'));
+    }
 }

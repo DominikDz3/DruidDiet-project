@@ -24,6 +24,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/register', 'register')->name('register');
     Route::post('/auth/register', 'store')->name('register.store');
     Route::get('/caterings', [CateringController::class, 'index'])->name('caterings.index');
+    Route::get('/caterings/{catering}', [CateringController::class, 'show'])->name('caterings.show');
+
 });
 
 // Ścieżka do wyświetlania listy diet
