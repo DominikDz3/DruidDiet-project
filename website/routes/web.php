@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\CouponController as AdminCouponController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\TOTPController;
 use App\Http\Controllers\Admin\AdminCateringController;
 use App\Http\Controllers\CalculatorDashboardController;
 
@@ -27,10 +28,15 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/logout', 'logout')->name('logout');
     Route::get('/auth/register', 'register')->name('register');
     Route::post('/auth/register', 'store')->name('register.store');
-    Route::get('/caterings', [CateringController::class, 'index'])->name('caterings.index');
-    Route::get('/caterings/{catering}', [CateringController::class, 'show'])->name('caterings.show');
+
+    Route::get('/login/totp-verify', 'showTotpForm')->name('login.totp.form');
+    Route::post('/login/totp-verify', 'verifyTotp')->name('login.totp.verify');
+
+    Route::get('/caterings', [App\Http\Controllers\CateringController::class, 'index'])->name('caterings.index');
+    Route::get('/caterings/{catering}', [App\Http\Controllers\CateringController::class, 'show'])->name('caterings.show');
 
 });
+
 
 // Ścieżka do wyświetlania listy diet
 Route::get('/diety', [DietController::class, 'index'])->name('diets.index');
@@ -54,6 +60,14 @@ Route::middleware(['auth'])->group(function () {
     //kalkulatory
     Route::get('/kalkulatory', [CalculatorDashboardController::class, 'showAllCalculators'])->name('calculators.index');
     Route::post('/kalkulatory/zapotrzebowanie-wody', [CalculatorDashboardController::class, 'calculateWaterNeed'])->name('calculators.water.calculator.calculate');
+
+    Route::prefix('user/totp')->name('user.totp.')->group(function () {
+        Route::get('/manage', [TOTPController::class, 'showManageForm'])->name('manage');
+        Route::get('/setup', [TOTPController::class, 'showSetupForm'])->name('setup');
+        Route::post('/enable', [TOTPController::class, 'enableTOTP'])->name('enable');
+        Route::post('/disable', [TOTPController::class, 'disableTOTP'])->name('disable');
+    });
+
 
     Route::middleware(['role:admin'])
         ->prefix('admin')
