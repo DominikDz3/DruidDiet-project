@@ -1,5 +1,14 @@
 FROM php:8.2-fpm
 
+RUN docker-php-ext-install fileinfo
+RUN echo "upload_max_filesize = 2M" > /usr/local/etc/php/conf.d/uploads.ini
+RUN echo "post_max_size = 2M" >> /usr/local/etc/php/conf.d/uploads.ini
+RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/errors.ini
+RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/errors.ini
+RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/errors.ini
+RUN echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/memory.ini
+RUN echo "max_execution_time = 30" >> /usr/local/etc/php/conf.d/time.ini
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     git \

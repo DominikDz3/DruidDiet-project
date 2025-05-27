@@ -12,6 +12,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\CouponController as AdminCouponController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\TOTPController;
+use App\Http\Controllers\Admin\AdminCateringController;
 
 // Strona główna
 Route::get('/', function () {
@@ -75,6 +76,9 @@ Route::middleware(['auth'])->group(function () {
 
         // CRUD dla Użytkowników
         Route::resource('users', AdminUserController::class);
+
+         // Pełen CRUD dla zasobu cateringów
+        Route::resource('caterings', AdminCateringController::class);
 
         // CRUD dla Kodów Rabatowych
         Route::get('coupons/random-user-form', [AdminCouponController::class, 'showRandomUserForm'])->name('coupons.randomUserForm');

@@ -190,7 +190,6 @@
     <section class="caterings-list mb-5">
         <h2 class="text-center mb-4" style="color: #4a6b5a;">Dostępne Kateringi</h2>
         <div class="row">
-            {{-- Zakładam, że zmienna $caterings jest przekazywana z CateringController@index --}}
             @if(isset($caterings) && $caterings->count() > 0)
                 @foreach ($caterings as $catering)
                     <div class="col-md-6 col-lg-4 mb-4">
