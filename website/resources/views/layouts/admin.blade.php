@@ -2,12 +2,9 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title', 'DruidDiet - Panel Administratora')</title> {{-- Zmieniony domyślny tytuł --}}
+    <title>@yield('title', 'DruidDiet - Panel Administratora')</title>
 
-    <link rel="stylesheet" href="{{ asset('css/nordic.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/nordic.css') }}"> <link rel="stylesheet" href="{{ asset('css/admin.css') }}"> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     @stack('styles')
@@ -36,7 +33,7 @@
                         <i class="fas fa-tags me-2"></i> Kody Rabatowe
                     </a>
                     <a href="#" class="nav-link {{-- request()->routeIs('admin.diets*') ? 'active' : '' --}}">
-                        <i class="fas fa-utensils me-2"></i> Diety
+                        <i class="fas fa-utensils me-2"></i> Diety (Wkrótce)
                     </a>
                     <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->routeIs('admin.orders*') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart me-2"></i> Zamówienia

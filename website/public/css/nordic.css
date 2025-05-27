@@ -509,3 +509,11 @@ footer {
     border: solid transparent;
     border-width: 1px 0;
 }
+
+.list-group-item h5 {
+        color: #4a6b5a;
+    }
+.card-header {
+    background-color: #4a6b5a !important;
+    color: white !important;
+}
