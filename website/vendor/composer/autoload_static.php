@@ -469,6 +469,7 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         'App\\Http\\Controllers\\Admin\\CouponController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CouponController.php',
         'App\\Http\\Controllers\\Admin\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OrderController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
+        'App\\Http\\Controllers\\CalculatorDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/CalculatorDashboardController.php',
         'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',
         'App\\Http\\Controllers\\CateringController' => __DIR__ . '/../..' . '/app/Http/Controllers/CateringController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',

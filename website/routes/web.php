@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\CouponController as AdminCouponController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\TOTPController;
 use App\Http\Controllers\Admin\AdminCateringController;
+use App\Http\Controllers\CalculatorDashboardController;
+
 
 // Strona główna
 Route::get('/', function () {
@@ -55,12 +57,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/user/my-coupons', [UserProfileController::class, 'myCoupons'])->name('user.myCoupons');
 
+    //kalkulatory
+    Route::get('/kalkulatory', [CalculatorDashboardController::class, 'showAllCalculators'])->name('calculators.index');
+    Route::post('/kalkulatory/zapotrzebowanie-wody', [CalculatorDashboardController::class, 'calculateWaterNeed'])->name('calculators.water.calculator.calculate');
+
     Route::prefix('user/totp')->name('user.totp.')->group(function () {
         Route::get('/manage', [TOTPController::class, 'showManageForm'])->name('manage');
         Route::get('/setup', [TOTPController::class, 'showSetupForm'])->name('setup');
         Route::post('/enable', [TOTPController::class, 'enableTOTP'])->name('enable');
         Route::post('/disable', [TOTPController::class, 'disableTOTP'])->name('disable');
     });
+
 
     Route::middleware(['role:admin'])
         ->prefix('admin')
