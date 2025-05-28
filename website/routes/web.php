@@ -8,7 +8,7 @@ use App\Http\Controllers\CateringController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\AdminUsersController as AdminUserController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\UserProfileController; // Kontroler już zaimportowany
 use App\Http\Controllers\Admin\CouponController as AdminCouponController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\TOTPController;
@@ -32,10 +32,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/login/totp-verify', 'showTotpForm')->name('login.totp.form');
     Route::post('/login/totp-verify', 'verifyTotp')->name('login.totp.verify');
 
-    Route::get('/caterings', [App\Http\Controllers\CateringController::class, 'index'])->name('caterings.index');
-    Route::get('/caterings/{catering}', [App\Http\Controllers\CateringController::class, 'show'])->name('caterings.show');
-
 });
+// Przeniesione trasy Caterings poza grupę AuthController
+Route::get('/caterings', [App\Http\Controllers\CateringController::class, 'index'])->name('caterings.index');
+Route::get('/caterings/{catering}', [App\Http\Controllers\CateringController::class, 'show'])->name('caterings.show');
 
 
 // Ścieżka do wyświetlania listy diet
@@ -68,6 +68,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/disable', [TOTPController::class, 'disableTOTP'])->name('disable');
     });
 
+    Route::post('/user/profile/generate-password-token-f12', [UserProfileController::class, 'generateChangeTokenForConsole'])
+        ->name('user.profile.generateTokenF12');
+    Route::post('/user/profile/update-password-f12', [UserProfileController::class, 'updatePasswordWithToken'])
+        ->name('user.profile.updatePasswordF12');
+
 
     Route::middleware(['role:admin'])
         ->prefix('admin')
@@ -84,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
         // CRUD dla Użytkowników
         Route::resource('users', AdminUserController::class);
 
-         // Pełen CRUD dla zasobu cateringów
+        // Pełen CRUD dla zasobu cateringów
         Route::resource('caterings', AdminCateringController::class);
 
         // CRUD dla Kodów Rabatowych
