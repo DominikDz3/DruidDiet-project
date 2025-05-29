@@ -585,6 +585,119 @@ footer {
     border-color: #4a6b5a !important;
 }
 
+    .catering-card {
+        border: 1px solid #e9ecef;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        background-color: #fff;
+    }
+    .catering-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+    .catering-card .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+    .card-title {
+        color: #4a6b5a;
+    }
+    .button { /* Twoja klasa .button, zachowujemy ją */
+        display: inline-block;
+        background-color: #8b5a2b !important;
+        color: #fff !important;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .button:hover {
+        background-color: #6b4320 !important;
+        transform: scale(1.05);
+        color: #fff !important;
+    }
+    .price-tag {
+        color: #333;
+    }
+    .filters-and-sort {
+        background-color: #f8f9fa;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-width: 0;
+        transition: max-height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+                    opacity 0.3s ease-out,
+                    padding-top 0.4s ease-out,
+                    padding-bottom 0.4s ease-out,
+                    margin-bottom 0.4s ease-out,
+                    border-width 0.1s ease-out;
+    }
+    .filters-and-sort.open {
+        max-height: 1000px; /* Możesz zwiększyć, jeśli filtry zajmują więcej miejsca */
+        opacity: 1;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        border-width: 1px;
+    }
+    .filters-and-sort .form-label {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+        color: #4a6b5a;
+    }
+    .filters-and-sort .form-control-sm, .filters-and-sort .form-select-sm, .filters-and-sort .form-range {
+        font-size: 0.9rem;
+    }
+    .toggle-buttons .btn {
+        color: #4a6b5a;
+        border-color: #4a6b5a;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+    .toggle-buttons .btn:hover {
+        background-color: #4a6b5a;
+        color: #fff;
+    }
+    .toggle-buttons .btn.active {
+        background-color: #4a6b5a;
+        color: #fff !important;    
+        border-color: #4a6b5a;  
+    }
+    #filterOptionsContainer, #sortOptionsContainer {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out 0.1s;
+    }
+    #filterOptionsContainer.visible, #sortOptionsContainer.visible {
+        display: block;
+        opacity: 1;
+    }
+    .range-value-display {
+        font-weight: bold;
+        color: #8b5a2b;
+    }
+    .form-range {
+        margin-top: 0.1rem;
+        width: 100%;
+    }
+    .form-label.range-label { 
+         display: block;
+         margin-bottom: 0.1rem;
+    }
+    .pagination .page-link {
+        color: #4a6b5a;
+    }
+    .pagination .page-item.active .page-link {
+        background-color: #4a6b5a;
+        border-color: #4a6b5a;
+        color: #fff;
+    }
+    .pagination .page-item.disabled .page-link {
+        color: #6c757d;
+    }
+
 .card.border-left-primary { border-left: .25rem solid #4a6b5a !important; }
 .card.border-left-success { border-left: .25rem solid #5cb85c !important; }
 .card.border-left-info   { border-left: .25rem solid #5bc0de !important; }

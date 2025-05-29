@@ -491,7 +491,6 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         'App\\Http\\Requests\\Admin\\StoreUserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/StoreUserRequest.php',
         'App\\Http\\Requests\\Admin\\UpdateUserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateUserRequest.php',
         'App\\Http\\Requests\\User\\UpdateUserProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/User/UpdateUserProfileRequest.php',
-        'App\\Models\\Bmiresult' => __DIR__ . '/../..' . '/app/Models/Bmiresult.php',
         'App\\Models\\Catering' => __DIR__ . '/../..' . '/app/Models/Catering.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
         'App\\Models\\Coupon' => __DIR__ . '/../..' . '/app/Models/Coupon.php',

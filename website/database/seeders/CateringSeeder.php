@@ -21,6 +21,7 @@ class CateringSeeder extends Seeder
             'type' => "Katering impreza",
             'elements' => "Mini kanapki z różnymi pastami, wędlinami i serami, Pizza w różnych wariantach, np. z kurczakiem, pieczarkami, serem, Sałatka (grecka, cezar, z kurczakiem)",
             'price' => 2000,
+            'kcal_per_person' => 1800, 
             'photo' => "KateringOsiemnstka.jpg",
             'allergens' => "gluten, laktoza, jaja, soja"
         ]);
@@ -31,6 +32,7 @@ class CateringSeeder extends Seeder
             'type' => "Katering impreza",
             'elements' => "Rosół z makaronem domowym, Pieczeń z karkówki w sosie własnym, Ziemniaki opiekane z ziołami, Mix sałat z sosem winegret, Surówka z białej kapusty, Deser: Tort komunijny (np. śmietankowy z owocami), Mini serniczki, Owoce filetowane",
             'price' => 3000,
+            'kcal_per_person' => 2200, 
             'photo' => "",
             'allergens' => "gluten, jaja, laktoza, seler"
         ]);
@@ -41,6 +43,7 @@ class CateringSeeder extends Seeder
             'type' => "Katering plenerowy",
             'elements' => "Grillowane warzywa (papryka, cukinia, bakłażan, ziemniaki), Grillowana pierś kurczaka, Sosy (sos tatarski, sos z suszonymi pomidorami), Pieczone ziemniaki z ziołami i serem",
             'price' => 1000,
+            'kcal_per_person' => 1500, 
             'photo' => "KateringGrill.jpg",
             'allergens' => "laktoza, gorczyca"
         ]);
@@ -51,6 +54,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering biznesowy",
             "elements" => "Kanapki bankietowe (z łososiem i serkiem chrzanowym, z szynką parmeńską i rukolą, wegetariańskie z hummusem), Wrapy z kurczakiem i świeżymi warzywami, Sałatka Caprese z bazyliowym pesto, Mini tarty owocowe, Woda mineralna niegazowana i gazowana, Soki owocowe (pomarańczowy, jabłkowy)",
             "price" => 1500,
+            "kcal_per_person" => 1200, 
             "photo" => "",
             "allergens" => "gluten, laktoza, ryby, orzechy"
         ]);
@@ -61,6 +65,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering wegetariański",
             "elements" => "Kotleciki z ciecierzycy i marchewki z sosem jogurtowo-miętowym, Pieczone bataty z rozmarynem i czosnkiem, Hummus klasyczny z chlebkiem pita i świeżymi warzywami (marchew, ogórek, papryka), Sałatka z quinoa, pieczonymi burakami, rukolą i serem feta, Ciasto marchewkowe z bakaliami",
             "price" => 1250,
+            "kcal_per_person" => 1300, 
             "photo" => "",
             "allergens" => "gluten, laktoza, orzechy"
         ]);
@@ -71,6 +76,7 @@ class CateringSeeder extends Seeder
             'type' => "Katering dla dzieci",
             'elements' => "Mini pizze margherita, Nuggetsy z kurczaka (pieczone, nie smażone), Kolorowe szaszłyki owocowe (winogrona, truskawki, melon, kiwi), Paluszki warzywne (marchewka, ogórek) z dipem jogurtowym, Muffinki czekoladowe z kolorową posypką, Sok jabłkowy 100%, Woda niegazowana",
             'price' => 850,
+            'kcal_per_person' => 1000, 
             'photo' => "",
             'allergens' => "gluten, laktoza, jaja"
         ]);
@@ -81,6 +87,7 @@ class CateringSeeder extends Seeder
             'type' => "Katering śniadaniowy",
             'elements' => "Świeże pieczywo (jasne, ciemne, bułki), Wybór serów żółtych i pleśniowych, Wysokiej jakości wędliny, Jajecznica na maśle ze szczypiorkiem, Parówki z wody, Jogurty naturalne i owocowe z granolą i świeżymi owocami, Croissanty maślane, Kawa świeżo parzona, Herbata (różne rodzaje), Soki (pomarańczowy, grejpfrutowy)",
             'price' => 950,
+            'kcal_per_person' => 800,
             'photo' => "",
             'allergens' => "gluten, laktoza, jaja"
         ]);
@@ -91,6 +98,7 @@ class CateringSeeder extends Seeder
             'type' => "Katering regionalny",
             'elements' => "Smalec domowy ze skwarkami i jabłkiem, Ogórki kiszone i małosolne własnej roboty, Chleb wiejski na naturalnym zakwasie, Wybór wędlin swojskich (kiełbasa jałowcowa, szynka wędzona, boczek pieczony), Sery regionalne (oscypek, korbacze, bundz), Pasztet domowy z dziczyzny, Marynowane grzybki, Żurawina",
             'price' => 1900,
+            'kcal_per_person' => 2500, 
             'photo' => "",
             'allergens' => "gluten, gorczyca, jaja"
         ]);
@@ -101,6 +109,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering impreza",
             "elements" => "Deska serów i wędlin premium (np. Prosciutto, Salami Milano, Brie, Comté), Mini burgery wołowe z karmelizowaną cebulą i sosem BBQ, Krewetki w tempurze z sosem sweet chili, Sałatka z rukolą, gruszką, orzechami włoskimi i serem pleśniowym, Patatas bravas z aioli, Mini ptysie z kremem waniliowym i owocami",
             "price" => 2200,
+            "kcal_per_person" => 1700, 
             "photo" => "",
             "allergens" => "gluten, laktoza, skorupiaki, orzechy, gorczyca, jaja, soja"
         ]);
@@ -111,6 +120,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering impreza",
             "elements" => "Nachosy z sosem serowym i guacamole, Popcorn maślany, Mini hot-dogi, Paluszki grissini z dipem ziołowym, Mix słonych przekąsek (orzeszki, precelki), Czekoladowe brownie",
             "price" => 700,
+            "kcal_per_person" => 1200,
             "photo" => "",
             "allergens" => "gluten, laktoza, orzechy, soja, jaja"
         ]);
@@ -121,6 +131,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering plenerowy",
             "elements" => "Świeże bagietki, Kanapki z pastą jajeczną i szczypiorkiem oraz z hummusem i pieczoną papryką, Roladki z tortilli z grillowanym kurczakiem i warzywami, Sałatka owocowa sezonowa (np. arbuz, melon, winogrona), Mini quiche lorraine, Domowa lemoniada cytrynowo-miętowa, Ciasteczka owsiane z żurawiną",
             "price" => 900,
+            "kcal_per_person" => 1100, 
             "photo" => "",
             "allergens" => "gluten, jaja, laktoza, gorczyca"
         ]);
@@ -131,6 +142,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering plenerowy",
             "elements" => "Kiełbaski do pieczenia na ogniu (różne rodzaje), Karkówka marynowana do grillowania na ruszcie, Chleb wiejski, Musztarda, Ketchup, Ogórki kiszone, Smalec ze skwarkami, Pieczone ziemniaki w folii z masłem czosnkowym, Napoje (woda, soki)",
             "price" => 1300,
+            "kcal_per_person" => 1900, 
             "photo" => "",
             "allergens" => "gluten, gorczyca, laktoza"
         ]);
@@ -140,7 +152,8 @@ class CateringSeeder extends Seeder
             "description" => "Elegancka i bogata przerwa kawowa z wykwintnymi przekąskami na spotkania biznesowe, konferencje i szkolenia na najwyższym poziomie.",
             "type" => "Katering biznesowy",
             "elements" => "Wybór kaw speciality (espresso, americano, cappuccino, latte) parzonych przez baristę, Herbaty liściaste premium (czarna, zielona, owocowa, ziołowa), Świeżo wyciskane soki (pomarańczowy, grejpfrutowy, jabłkowy), Mini croissanty z nadzieniem migdałowym i czekoladowym, Financierki, Makaroniki (różne smaki), Panna cotta z musem malinowym w małych słoiczkach, Owoce filetowane (melon, ananas, winogrona, kiwi), Woda z cytryną, miętą i imbirem",
-            "price" => 1100, 
+            "price" => 1100,
+            "kcal_per_person" => 600, 
             "photo" => "PrzerwaKawowaPremiumdlaVIP.jpg",
             "allergens" => "gluten, laktoza, jaja, orzechy"
         ]);
@@ -151,6 +164,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering biznesowy",
             "elements" => "Mix kanapek na pieczywie pełnoziarnistym i jasnym (z rostbefem i rukolą, z serem kozim i figą, z tuńczykiem), Sałatka grecka w indywidualnych porcjach, Jogurt z musli i owocami, Baton energetyczny, Woda mineralna",
             "price" => 850,
+            "kcal_per_person" => 900, 
             "photo" => "",
             "allergens" => "gluten, laktoza, ryby, orzechy, jaja"
         ]);
@@ -161,6 +175,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering dla dzieci",
             "elements" => "Mini-hot dogi 'Wesołe Gąsieniczki', Szaszłyki owocowe 'Kolorowe Klejnoty' (z winogron, truskawek, borówek, ananasa), Kanapki w kształcie gwiazdek i serduszek z szynką, serem i świeżym ogórkiem, Chrupiące słupki marchewki i papryki 'Złote Sztabki' z dipem jogurtowo-ziołowym, Galaretki owocowe 'Tęczowe Kryształy' w pucharkach, Babeczki 'Wulkan Czekolady' z kolorową posypką i żelkami, Sok jabłkowy i pomarańczowy 'Eliksir Mocy'",
             "price" => 980,
+            "kcal_per_person" => 750, 
             "photo" => "",
             "allergens" => "gluten, laktoza, jaja, gorczyca, soja "
         ]);
@@ -171,6 +186,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering impreza",
             "elements" => "Duże misy chipsów i chrupek, Paluszki słone i sezamowe, Koreczki serowo-wędliniarskie z oliwkami, Mini zapiekanki z pieczarkami i serem na bagietce, Prosta sałatka jarzynowa tradycyjna, Napoje gazowane (cola, oranżada, woda).",
             "price" => 550,
+            "kcal_per_person" => 1400, 
             "photo" => "",
             "allergens" => "gluten, laktoza, jaja, gorczyca, seler, sezam"
         ]);
@@ -181,6 +197,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering kulturalny",
             "elements" => "Mini kanapki bankietowe (3 rodzaje: z pastą łososiową, z hummusem i suszonym pomidorem, z serem pleśniowym i winogronem), Kruche ciasteczka (np. cytrynowe, maślane), Wybór herbat czarnych, zielonych i owocowych, Kawa parzona, Woda mineralna z cytryną i miętą, Małe patery owoców sezonowych (np. winogrona, mandarynki, truskawki).",
             "price" => 600,
+            "kcal_per_person" => 500, 
             "photo" => "",
             "allergens" => "gluten, laktoza, jaja, ryby, orzechy (w niektórych ciastkach), soja (w pastach)"
         ]);
@@ -191,6 +208,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering specjalny",
             "elements" => "Przystawka: Krem z białych warzyw z chipsem z parmezanu i oliwą truflową. Danie główne (do wyboru jedno): Polędwiczki wieprzowe w sosie kurkowym z puree ziemniaczanym i blanszowanymi szparagami LUB Łosoś pieczony w ziołach z czarnym ryżem i sałatką z rukoli, pomidorków cherry i winegret. Deser: Mus czekoladowy z musem malinowym i świeżymi owocami.",
             "price" => 750,
+            "kcal_per_person" => 1200, 
             "photo" => "",
             "allergens" => "laktoza, gluten (np. grzanki, panierka), ryby (opcja), seler, gorczyca (w winegret)"
         ]);
@@ -201,6 +219,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering plenerowy",
             "elements" => "Grillowane szaszłyki drobiowe z papryką i cebulą, Duża sałatka grecka z serem feta i oliwkami, Bruschetta z dojrzałymi pomidorami, czosnkiem i bazylią, Domowa lemoniada arbuzowo-miętowa, Mini tarty z owocami sezonowymi (np. truskawki, maliny, borówki), Pieczywo czosnkowe z grilla.",
             "price" => 1150,
+            "kcal_per_person" => 1000, 
             "photo" => "",
             "allergens" => "gluten, laktoza, gorczyca (w marynacie do szaszłyków)"
         ]);
@@ -211,6 +230,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering biznesowy",
             "elements" => "Wybór wrapów pełnoziarnistych (z hummusem, pieczonymi warzywami i rukolą; z indykiem, awokado i świeżym szpinakiem), Zupa krem z sezonowych warzyw (np. dyniowa jesienią, chłodnik litewski latem) serwowana w kubeczkach, Duża miska sałaty z grillowanym halloumi, pomarańczą i orzechami włoskimi z dressingiem miodowo-musztardowym, Świeże owoce (jabłka, banany, gruszki), Woda z cytryną, miętą i imbirem, Ciasteczka owsiane z bakaliami.",
             "price" => 1350,
+            "kcal_per_person" => 800, 
             "photo" => "",
             "allergens" => "gluten, laktoza (halloumi), seler (w zupie), orzechy włoskie, gorczyca, sezam (w hummusie)"
         ]);
@@ -221,6 +241,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering dla młodzieży",
             "elements" => "Duża pizza (np. Pepperoni, Margherita, Hawajska - 3 sztuki), Skrzydełka z kurczaka w glazurze BBQ, Frytki belgijskie z keczupem i sosem czosnkowym, Mini tortille z kurczakiem, serem cheddar i salsą pomidorową, Mix napojów gazowanych i soków, Babeczki czekoladowe z kolorową posypką.",
             "price" => 1650,
+            "kcal_per_person" => 1600, 
             "photo" => "",
             "allergens" => "gluten, laktoza, jaja, soja (w sosie BBQ, salsie), gorczyca"
         ]);
@@ -231,6 +252,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering rodzinny",
             "elements" => "Zupa: Rosół z domowym makaronem. Dania główne: Zrazy wołowe w sosie własnym, Pieczony kurczak w ziołach, Devolay z masłem. Dodatki: Ziemniaki gotowane z koperkiem, Kluski śląskie, Kasza gryczana. Surówki: Surówka z białej kapusty, Buraczki zasmażane, Mizeria. Deser: Sernik domowy na kruchym spodzie, Szarlotka z kruszonką. Napoje: Kompot owocowy, Woda z cytryną.",
             "price" => 2450,
+            "kcal_per_person" => 2000, 
             "photo" => "",
             "allergens" => "gluten, jaja, laktoza, seler, gorczyca"
         ]);
@@ -241,6 +263,7 @@ class CateringSeeder extends Seeder
             "type" => "Katering okolicznościowy",
             "elements" => "Przystawki (serwowane na paterach): Łosoś wędzony na blinach gryczanych z koperkowym serkiem, Roladki z szynki parmeńskiej z melonem, rukolą i octem balsamicznym, Vol-au-vents z musem grzybowym i tymiankiem, Mini sałatki Caprese na patyczkach. Danie główne (bufet): Pierś z kaczki w sosie wiśniowym z kluseczkami gnocchi i czerwoną kapustą z żurawiną, Dorsz atlantycki pieczony na puree z zielonego groszku z sosem szafranowym i grillowanymi warzywami. Deser (bufet): Mini torciki (np. red velvet, czekoladowy z malinami), Panna cotta z musem mango, Wybór świeżych owoców sezonowych.",
             "price" => 2950,
+            "kcal_per_person" => 1500, 
             "photo" => "",
             "allergens" => "gluten, laktoza, jaja, ryby, orzechy, seler, gorczyca, soja"
         ]);
