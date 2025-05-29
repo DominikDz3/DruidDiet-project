@@ -12,7 +12,7 @@ class Catering extends Model
 
     protected $fillable = [
         'title', 'description', 'type', 'elements',
-        'price', 'photo', 'allergens'
+        'price', 'photo', 'allergens','kcal_per_person'
     ];
 
 

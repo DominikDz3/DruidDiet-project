@@ -36,7 +36,6 @@ return array(
     'App\\Http\\Requests\\Admin\\StoreUserRequest' => $baseDir . '/app/Http/Requests/Admin/StoreUserRequest.php',
     'App\\Http\\Requests\\Admin\\UpdateUserRequest' => $baseDir . '/app/Http/Requests/Admin/UpdateUserRequest.php',
     'App\\Http\\Requests\\User\\UpdateUserProfileRequest' => $baseDir . '/app/Http/Requests/User/UpdateUserProfileRequest.php',
-    'App\\Models\\Bmiresult' => $baseDir . '/app/Models/Bmiresult.php',
     'App\\Models\\Catering' => $baseDir . '/app/Models/Catering.php',
     'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',
     'App\\Models\\Coupon' => $baseDir . '/app/Models/Coupon.php',
