@@ -2,8 +2,27 @@
 
 @section('title', 'Kalkulatory - ' . config('app.name'))
 
+@push('styles')
+<style>
+    /* Zachowaj style dla sekcji wyników BMI i ewentualnych innych elementów */
+    .bmi-result-display {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: #fff;
+        border: 1px dashed #4a6b5a;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .bmi-result-display strong {
+        font-size: 1.2em;
+        color: #8b5a2b;
+    }
+    /* Dodaj inne niezbędne style z diets.blade.php, jeśli są ogólne i potrzebne */
+</style>
+@endpush
+
 @section('content')
-<section class="user-dashboard py-5 container"> 
+<section class="user-dashboard py-5 container">
     <div class="row">
         <aside class="col-md-3 mb-4">
             <div class="list-group rounded-3 overflow-hidden">
@@ -18,6 +37,9 @@
                 </a>
                 <a href="{{ route('calculators.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('calculators.*') ? 'active-custom' : '' }}">
                     <i class="bi bi-calculator me-2"></i> Kalkulatory
+                </a>
+                <a href="{{ route('user.totp.manage') }}" class="list-group-item list-group-item-action {{ request()->routeIs('user.totp.manage') || request()->routeIs('user.totp.setup') ? 'active-custom' : '' }}">
+                    <i class="bi bi-shield-lock me-2"></i> Uwierzytelnianie 2FA
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-gear me-2"></i> Ustawienia konta
@@ -58,14 +80,13 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-4">
-                            <div class="card h-100 {{ isset($activeCalculator) && $activeCalculator === 'water' ? 'border border-primary' : '' }}"> {{-- Usunięto shadow-sm i rounded-3 bo już są na karcie nadrzędnej, dodałem 'h-100' dla równej wysokości --}}
+                            <div class="card h-100 {{ isset($activeCalculator) && $activeCalculator === 'water' ? 'border border-primary' : '' }}">
                                 <div class="card-header py-3">
                                     <h5 class="mb-0 fw-bold">Zapotrzebowanie na wodę</h5>
                                 </div>
                                 <div class="card-body p-4">
                                     <form method="POST" action="{{ route('calculators.water.calculator.calculate') }}">
                                         @csrf
-
                                         <div class="mb-3">
                                             <label for="water_weight" class="form-label">Twoja waga (kg):</label>
                                             <input type="number" step="0.1" class="form-control @error('weight') is-invalid @enderror" id="water_weight" name="weight" value="{{ old('weight', $waterWeight ?? '') }}" required>
@@ -75,7 +96,6 @@
                                                 </div>
                                             @enderror
                                         </div>
-
                                         <div class="mb-3">
                                             <label for="water_activity_level" class="form-label">Poziom aktywności:</label>
                                             <select class="form-select @error('activity_level') is-invalid @enderror" id="water_activity_level" name="activity_level" required>
@@ -90,7 +110,6 @@
                                                 </div>
                                             @enderror
                                         </div>
-
                                         <button type="submit" class="btn btn-primary" style="background-color: #4a6b5a !important; border-color: #4f772d !important;">Oblicz zapotrzebowanie</button>
                                     </form>
 
@@ -104,7 +123,48 @@
                             </div>
                         </div>
 
-                        
+                        {{-- Sekcja Kalkulatora BMI (tylko wyświetlanie, bez formularza do obliczeń na tej stronie) --}}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header py-3">
+                                    <h5 class="mb-0 fw-bold">Kalkulator BMI</h5>
+                                </div>
+                                <div class="card-body p-4">
+                                    
+                                    @if ($latestBmi)
+                                        <hr class="my-4">
+                                        <div class="bmi-result-display">
+                                            Twoje ostatnie obliczone BMI (z dnia {{ $latestBmi->created_at->format('d.m.Y') }}):
+                                            <h4 class="mb-3">
+                                                <strong>{{ number_format($latestBmi->bmi_value, 2) }}</strong>
+                                                @php
+                                                    $bmiCategory = '';
+                                                    $alertClass = 'alert-info';
+                                                    if ($latestBmi->bmi_value < 18.5) {
+                                                        $bmiCategory = 'Niedowaga';
+                                                        $alertClass = 'alert-warning';
+                                                    } elseif ($latestBmi->bmi_value >= 18.5 && $latestBmi->bmi_value < 24.9) {
+                                                        $bmiCategory = 'Waga prawidłowa';
+                                                        $alertClass = 'alert-success';
+                                                    } elseif ($latestBmi->bmi_value >= 25 && $latestBmi->bmi_value < 29.9) {
+                                                        $bmiCategory = 'Nadwaga';
+                                                        $alertClass = 'alert-warning';
+                                                    } else {
+                                                        $bmiCategory = 'Otyłość';
+                                                        $alertClass = 'alert-danger';
+                                                    }
+                                                @endphp
+                                                <span class="badge bg-{{ str_replace('alert-', '', $alertClass) }}">{{ $bmiCategory }}</span>
+                                            </h4>
+                                        </div>
+                                    @else
+                                        <p class="card-text text-info">
+                                            Brak zapisanych danych BMI. Oblicz swoje BMI na stronie diet, aby zobaczyć je tutaj.
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,7 +172,3 @@
     </div>
 </section>
 @endsection
-
-{{-- @push('scripts')
-<script src="{{ asset('js/profile-edit.js') }}" defer></script>
-@endpush --}}

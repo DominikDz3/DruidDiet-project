@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bmiresults', function (Blueprint $table) {
+        Schema::create('bmi_results', function (Blueprint $table) {
             $table->id('bmi_result_id');
             $table->foreignId('user_id')->constrained('users', 'user_id');
             $table->decimal('bmi_value', 5, 2);
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bmiresults');
+        Schema::dropIfExists('bmi_results');
     }
 };
