@@ -18,6 +18,7 @@
                 </a>
                 <a href="{{ route('calculators.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('calculators.*') ? 'active-custom' : '' }}">
                     <i class="bi bi-calculator me-2"></i> Kalkulatory
+                </a>
                 <a href="{{ route('user.totp.manage') }}" class="list-group-item list-group-item-action {{ request()->routeIs('user.totp.manage') || request()->routeIs('user.totp.setup') ? 'active-custom' : '' }}">
                     <i class="bi bi-shield-lock me-2"></i> Uwierzytelnianie 2FA
                 </a>

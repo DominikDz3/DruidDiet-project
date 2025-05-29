@@ -30,9 +30,9 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'user_id', 'user_id');
     }
 
-    public function bmiResults(): HasOne
+    public function bmiResults(): HasMany
     {
-        return $this->hasOne(BMIResult::class, 'user_id', 'user_id');
+        return $this->hasMany(BMIResult::class, 'user_id', 'user_id');
     }
 
     public function orders(): HasMany

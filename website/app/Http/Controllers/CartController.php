@@ -8,7 +8,6 @@ use App\Models\Diet;
 
 class CartController extends Controller
 {
-    // Wyświetlanie koszyka
     public function index(Request $request)
     {
         $cart = $request->session()->get('cart', []);
@@ -19,7 +18,6 @@ class CartController extends Controller
         return view('cart.index', compact('cart', 'totalPrice'));
     }
 
-    // Dodawanie produktu do koszyka
     public function add(Request $request)
     {
         $request->validate([
@@ -44,21 +42,18 @@ class CartController extends Controller
         }
 
         $cart = $request->session()->get('cart', []);
-        // Unikalny klucz dla pozycji w koszyku, np. "catering_1" lub "diet_5"
         $cartItemId = $productType . '_' . $product->{$productType.'_id'};
 
         if (isset($cart[$cartItemId])) {
-            // Produkt już jest w koszyku, zwiększ ilość
             $cart[$cartItemId]['quantity'] += $quantity;
         } else {
-            // Dodaj nowy produkt do koszyka
             $cart[$cartItemId] = [
-                'id' => $product->{$productType.'_id'}, // Oryginalne ID produktu
+                'id' => $product->{$productType.'_id'}, 
                 'type' => $productType,
                 'name' => $product->title,
                 'price' => $product->price,
                 'quantity' => $quantity,
-                'photo' => $product->photo, // Pamiętaj o obsłudze tego pola (ścieżka lub pominięcie)
+                'photo' => $product->photo, 
             ];
         }
 
@@ -67,7 +62,6 @@ class CartController extends Controller
         return back()->with('success', 'Dodano produkt do koszyka!');
     }
 
-    // Aktualizacja ilości produktu w koszyku
     public function update(Request $request, $cartItemId)
     {
         $request->validate([
@@ -86,7 +80,6 @@ class CartController extends Controller
         return back()->with('error', 'Nie znaleziono produktu w koszyku.');
     }
 
-    // Usuwanie produktu z koszyka
     public function remove(Request $request, $cartItemId)
     {
         $cart = $request->session()->get('cart', []);
@@ -100,7 +93,6 @@ class CartController extends Controller
         return back()->with('error', 'Nie znaleziono produktu w koszyku.');
     }
 
-    // Czyszczenie całego koszyka
     public function clear(Request $request)
     {
         $request->session()->forget('cart');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Diet;
-use App\Models\Bmiresult; // Upewnij się, że jest
+use App\Models\BmiResult; 
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -20,16 +20,14 @@ class DietController extends Controller
 
         $heightInput = $request->input('height_bmi');
         $weightInput = $request->input('weight_bmi');
-        $shouldSaveBmi = $request->boolean('save_bmi_result'); // Nowy parametr z checkboxa
-        $useSavedBmi = $request->boolean('use_saved_bmi'); // Nowy parametr
+        $shouldSaveBmi = $request->boolean('save_bmi_result'); 
+        $useSavedBmi = $request->boolean('use_saved_bmi'); 
 
         if ($user) {
-            $latestUserBmiResult = $user->bmiResults()->latest('created_at')->first(); // Pobierz ostatni zapisany wynik dla informacji
+            $latestUserBmiResult = $user->bmiResults()->latest('created_at')->first(); 
         }
 
-        // --- Logika BMI ---
         if ($request->filled('height_bmi') && $request->filled('weight_bmi')) {
-            // Obliczanie BMI z danych formularza
             $height = (float) $heightInput;
             $weight = (float) $weightInput;
 
@@ -37,23 +35,18 @@ class DietController extends Controller
                 $calculatedBmi = $weight / ($height * $height);
 
                 if ($user && $shouldSaveBmi) {
-                    Bmiresult::create([
+                    BmiResult::create([
                         'user_id' => $user->user_id, //
                         'bmi_value' => $calculatedBmi,
                         'created_at' => Carbon::now()
                     ]);
-                    // Odśwież $latestUserBmiResult, aby od razu pokazać nowo zapisany
                     $latestUserBmiResult = $user->bmiResults()->latest('created_at')->first();
                 }
             }
         } elseif ($user && $useSavedBmi && $latestUserBmiResult) {
-            // Użycie ostatniego zapisanego BMI zalogowanego użytkownika do filtrowania
             $calculatedBmi = $latestUserBmiResult->bmi_value;
-            // Przypisanie wzrostu i wagi z ostatniego zapisu nie jest możliwe, bo ich nie przechowujemy globalnie
-            // $heightInput i $weightInput pozostaną puste lub z poprzedniego żądania (jeśli były)
         }
 
-        // Filtrowanie diet na podstawie aktywnego $calculatedBmi (nowego lub zapisanego)
         if ($calculatedBmi && $calculatedBmi > 0) {
             if ($calculatedBmi < 18.5) {
                 $query->where('calories', '>=', 2500);
@@ -64,14 +57,12 @@ class DietController extends Controller
             } elseif ($calculatedBmi >= 25 && $calculatedBmi < 30) {
                 $query->where('calories', '<=', 2000);
                 $bmiCategory = 'Nadwaga';
-            } else { // Otyłość ($calculatedBmi >= 30)
+            } else { 
                 $query->where('calories', '<=', 1800);
                 $bmiCategory = 'Otyłość';
             }
         }
 
-        // --- Istniejące filtry (działają niezależnie lub dodatkowo, jeśli BMI nie filtruje kalorii) ---
-        // Kaloryczność (tylko jeśli nie filtrujemy aktywnie przez BMI)
         if (!($calculatedBmi && $calculatedBmi > 0)) {
              if ($request->filled('min_calories')) {
                 $query->where('calories', '>=', $request->input('min_calories'));
@@ -81,7 +72,6 @@ class DietController extends Controller
             }
         }
 
-        // Cena
         if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->input('min_price'));
         }
@@ -89,12 +79,10 @@ class DietController extends Controller
             $query->where('price', '<=', $request->input('max_price'));
         }
 
-        // Typ diety
         if ($request->filled('diet_type') && $request->input('diet_type') != 'all') {
             $query->where('type', $request->input('diet_type'));
         }
 
-        // --- Sortowanie ---
         $sortOption = $request->input('sort_option', 'title_asc');
         $sortParts = explode('_', $sortOption);
         $sortBy = $sortParts[0] ?? 'title';
@@ -116,11 +104,11 @@ class DietController extends Controller
             'diets' => $diets,
             'dietTypes' => $dietTypes,
             'currentFilters' => $request->only(['min_calories', 'max_calories', 'min_price', 'max_price', 'diet_type', 'sort_option', 'height_bmi', 'weight_bmi', 'save_bmi_result', 'use_saved_bmi']),
-            'calculatedBmi' => $calculatedBmi, // Może być świeżo obliczone lub z zapisanego rekordu
+            'calculatedBmi' => $calculatedBmi, 
             'bmiCategory' => $bmiCategory,
-            'heightInput' => $heightInput, // Zawsze z formularza lub null
-            'weightInput' => $weightInput, // Zawsze z formularza lub null
-            'latestUserBmiResult' => $latestUserBmiResult, // Ostatni zapisany wynik zalogowanego użytkownika
+            'heightInput' => $heightInput, 
+            'weightInput' => $weightInput, 
+            'latestUserBmiResult' => $latestUserBmiResult, 
         ]);
     }
 }

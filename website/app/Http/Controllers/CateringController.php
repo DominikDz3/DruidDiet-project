@@ -73,21 +73,15 @@ class CateringController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'type' => 'required|string|max:50', // Dostosuj długość do migracji
+            'type' => 'required|string|max:50', 
             'price' => 'required|numeric|min:0',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Walidacja zdjęcia
-            'elements' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
             'allergens' => 'nullable|string',
         ]);
 
         $photoPath = null;
         if ($request->hasFile('photo')) {
-            // Zapisz plik w katalogu 'caterings' na dysku 'public'.
-            // 'public' odnosi się do sterownika zdefiniowanego w config/filesystems.php,
-            // który domyślnie mapuje na storage/app/public.
-            // Plik zostanie zapisany z unikalną nazwą.
             $photoPath = $request->file('photo')->store('caterings', 'public');
-            // Ścieżka zapisana w bazie danych będzie np. 'caterings/unikalna_nazwa_pliku.jpg'
         }
 
         Catering::create([
@@ -95,7 +89,7 @@ class CateringController extends Controller
             'description' => $request->description,
             'type' => $request->type,
             'price' => $request->price,
-            'photo' => $photoPath, // Zapisz ścieżkę do bazy danych
+            'photo' => $photoPath, 
             'elements' => $request->elements,
             'allergens' => $request->allergens,
         ]);
@@ -110,22 +104,20 @@ class CateringController extends Controller
             'description' => 'required|string',
             'type' => 'required|string|max:50',
             'price' => 'required|numeric|min:0',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Walidacja zdjęcia
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
             'elements' => 'nullable|string',
             'allergens' => 'nullable|string',
         ]);
 
-        $photoPath = $catering->photo; // Zachowaj istniejącą ścieżkę domyślnie
+        $photoPath = $catering->photo; 
 
         if ($request->hasFile('photo')) {
-            // Jeśli istnieje stare zdjęcie, usuń je
             if ($catering->photo) {
                 Storage::disk('public')->delete($catering->photo);
             }
-            // Zapisz nowe zdjęcie
+            
             $photoPath = $request->file('photo')->store('caterings', 'public');
-        } else if ($request->input('remove_photo')) { // Opcjonalnie: pole do usuwania zdjęcia
-            if ($catering->photo) {
+        } else if ($request->input('remove_photo')) { 
                 Storage::disk('public')->delete($catering->photo);
                 $photoPath = null;
             }
@@ -136,7 +128,7 @@ class CateringController extends Controller
             'description' => $request->description,
             'type' => $request->type,
             'price' => $request->price,
-            'photo' => $photoPath, // Zapisz ścieżkę (nową lub starą) do bazy
+            'photo' => $photoPath, 
             'elements' => $request->elements,
             'allergens' => $request->allergens,
         ]);
@@ -144,10 +136,9 @@ class CateringController extends Controller
         return redirect()->route('caterings.index')->with('success', 'Catering został zaktualizowany!');
     }
 
-    // Opcjonalnie: Metoda do usuwania cateringu (razem ze zdjęciem)
+    
     public function destroy(Catering $catering)
     {
-        // Usuń plik fizycznie z dysku, zanim usuniesz rekord z bazy
         if ($catering->photo) {
             Storage::disk('public')->delete($catering->photo);
         }
