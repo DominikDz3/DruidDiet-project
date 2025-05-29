@@ -92,13 +92,19 @@
                 @foreach ($suggestedCaterings as $catering)
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card h-100 shadow-sm catering-card">
-                            @if ($catering->photo)
-                                <img src="{{ filter_var($catering->photo, FILTER_VALIDATE_URL) ? $catering->photo : asset('storage/' . $catering->photo) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}">
-                            @else
-                                <img src="https://via.placeholder.com/300x200.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Catering')) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}">
-                            @endif
+                            <a href="{{ route('caterings.show', $catering->catering_id) }}" style="text-decoration: none; color: inherit;">
+                                @if ($catering->photo)
+                                    <img src="{{ asset($catering->photo) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}" >
+                                @else
+                                    <img src="https://via.placeholder.com/300x200.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Catering')) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}">
+                                @endif
+                            </a>
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">{{ htmlspecialchars($catering->title ?? 'Brak tytułu') }}</h5>
+                                <h4 class="card-title">
+                                    <a href="{{ route('caterings.show', $catering->catering_id) }}" style="text-decoration: none; color: inherit;">
+                                        {{($catering->title ?? 'Brak tytułu') }}
+                                    </a>
+                                </h4>
                                 <p class="card-text"><small><strong>Typ:</strong> {{ htmlspecialchars($catering->type ?? 'N/A') }}</small></p>
                                 @if($catering->kcal_per_person)
                                     <p class="card-text"><small><strong>Kcal/osobę:</strong> {{ htmlspecialchars($catering->kcal_per_person) }} kcal</small></p>
@@ -142,11 +148,13 @@
                 @foreach ($allCaterings as $catering)
                     <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm catering-card">
-                            @if ($catering->photo)
-                                <img src="{{ filter_var($catering->photo, FILTER_VALIDATE_URL) ? $catering->photo : asset('storage/' . $catering->photo) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}">
-                            @else
-                                <img src="https://via.placeholder.com/300x200.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Catering')) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}">
-                            @endif
+                            <a href="{{ route('caterings.show', $catering->catering_id) }}" style="text-decoration: none; color: inherit;">
+                                @if ($catering->photo)
+                                    <img src="{{ asset($catering->photo) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}">
+                                @else
+                                    <img src="https://via.placeholder.com/300x200.png?text={{ urlencode(htmlspecialchars($catering->title ?? 'Catering')) }}" class="card-img-top" alt="{{ htmlspecialchars($catering->title ?? 'Catering') }}">
+                                @endif
+                            </a>
                             <div class="card-body d-flex flex-column">
                                 <h4 class="card-title">
                                     <a href="{{ route('caterings.show', $catering->catering_id) }}" style="text-decoration: none; color: inherit;">
@@ -159,9 +167,6 @@
                                 @endif
                                 <div style="flex-grow: 1;">
                                     <p class="card-text">{{ nl2br(htmlspecialchars($catering->description ?? 'Brak opisu.')) }}</p>
-                                    @if (!empty($catering->elements))
-                                        <p class="card-text mt-2"><small><strong>Skład:</strong> {{ htmlspecialchars($catering->elements) }}</small></p>
-                                    @endif
                                     @if (!empty($catering->allergens))
                                         <p class="card-text text-danger"><small><strong>Alergeny:</strong> {{ htmlspecialchars($catering->allergens) }}</small></p>
                                     @endif

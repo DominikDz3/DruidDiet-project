@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class CateringController extends Controller
 {
@@ -18,7 +19,7 @@ class CateringController extends Controller
         $suggestedCaterings = collect();
 
         $user = Auth::user();
-        $latestUserBmiResult = null; 
+        $latestUserBmiResult = null;
         $bmiCategory = null;
 
         if ($user) {
@@ -29,11 +30,13 @@ class CateringController extends Controller
 
             $cachedSuggestions = session($sessionKeyForSuggestions);
             $cachedBmiValue = session($sessionKeyForBmiValue);
-            $cachedBmiCategory = session($sessionKeyForBmiCategory);
 
             if ($latestUserBmiResult && $cachedBmiValue === $latestUserBmiResult->bmi_value && $cachedSuggestions) {
-                $suggestedCaterings = $cachedSuggestions;
-                $bmiCategory = $cachedBmiCategory;
+                // If cached suggestions exist and BMI value hasn't changed, retrieve them.
+                // It's crucial to re-fetch the models to ensure proper handling of attributes like 'photo'.
+                $suggestedCateringIds = $cachedSuggestions->pluck('catering_id')->toArray();
+                $suggestedCaterings = Catering::whereIn('catering_id', $suggestedCateringIds)->get();
+                $bmiCategory = session($sessionKeyForBmiCategory);
             } else {
                 if ($latestUserBmiResult && $latestUserBmiResult->bmi_value > 0) {
                     $calculatedBmi = $latestUserBmiResult->bmi_value;
@@ -59,9 +62,9 @@ class CateringController extends Controller
                     }
 
                     $suggestedCaterings = Catering::whereBetween('kcal_per_person', [$minCaloriesForCatering, $maxCaloriesForCatering])
-                                                  ->inRandomOrder()
-                                                  ->limit(4)
-                                                  ->get();
+                                                    ->inRandomOrder()
+                                                    ->limit(4)
+                                                    ->get();
 
                     session([
                         $sessionKeyForSuggestions => $suggestedCaterings,
@@ -103,7 +106,7 @@ class CateringController extends Controller
         } else {
             $allCateringsQuery->orderBy('title', 'asc');
         }
-        
+
         $allCaterings = $allCateringsQuery->paginate(9)->appends($request->except('page'));
 
         $cateringTypes = Catering::distinct()->pluck('type')->filter()->sort()->values();
@@ -128,9 +131,9 @@ class CateringController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'type' => 'required|string|max:50', 
+            'type' => 'required|string|max:50',
             'price' => 'required|numeric|min:0',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'elements' => 'nullable|string',
             'allergens' => 'nullable|string',
             'kcal_per_person' => 'nullable|integer|min:0',
@@ -138,7 +141,16 @@ class CateringController extends Controller
 
         $photoPath = null;
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('caterings', 'public'); 
+            $image = $request->file('photo');
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('img/caterings');
+
+            if (!File::isDirectory($destinationPath)) {
+                File::makeDirectory($destinationPath, 0777, true, true);
+            }
+
+            $image->move($destinationPath, $fileName);
+            $photoFileName = 'img/caterings/' . $fileName;
         }
 
         Catering::create([
@@ -146,7 +158,7 @@ class CateringController extends Controller
             'description' => $request->description,
             'type' => $request->type,
             'price' => $request->price,
-            'photo' => $photoPath, 
+            'photo' => $photoFileName,
             'elements' => $request->elements,
             'allergens' => $request->allergens,
             'kcal_per_person' => $request->kcal_per_person,
@@ -162,32 +174,42 @@ class CateringController extends Controller
             'description' => 'required|string',
             'type' => 'required|string|max:50',
             'price' => 'required|numeric|min:0',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'elements' => 'nullable|string',
             'allergens' => 'nullable|string',
             'kcal_per_person' => 'nullable|integer|min:0',
         ]);
 
-        $photoPath = $catering->photo;
+        $photoFileName = $catering->photo;
 
         if ($request->hasFile('photo')) {
-            if ($catering->photo) {
-                Storage::disk('public')->delete($catering->photo);
+             if ($catering->photo && File::exists(public_path($catering->photo))) {
+                 File::delete(public_path($catering->photo));
             }
-            $photoPath = $request->file('photo')->store('caterings', 'public');
+
+            $image = $request->file('photo');
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('img/caterings');
+
+            if (!File::isDirectory($destinationPath)) {
+                File::makeDirectory($destinationPath, 0777, true, true);
+            }
+
+            $image->move($destinationPath, $fileName);
+            $photoFileName = 'img/caterings/' . $fileName; // Zapisujemy ścieżkę względną do public
         } else if ($request->input('remove_photo')) {
-            if ($catering->photo) {
-                Storage::disk('public')->delete($catering->photo);
+            if ($catering->photo && File::exists(public_path($catering->photo))) {
+                File::delete(public_path($catering->photo));
             }
-            $photoPath = null;
-        } 
+            $photoFileName = null;
+        }
 
         $catering->update([
             'title' => $request->title,
             'description' => $request->description,
             'type' => $request->type,
             'price' => $request->price,
-            'photo' => $photoPath,
+            'photo' => $photoFileName,
             'elements' => $request->elements,
             'allergens' => $request->allergens,
             'kcal_per_person' => $request->kcal_per_person,
@@ -198,8 +220,8 @@ class CateringController extends Controller
 
     public function destroy(Catering $catering)
     {
-        if ($catering->photo) {
-            Storage::disk('public')->delete($catering->photo);
+        if ($catering->photo && File::exists(public_path($catering->photo))) {
+            File::delete(public_path($catering->photo));
         }
         $catering->delete();
         return redirect()->route('caterings.index')->with('success', 'Catering został usunięty!');
