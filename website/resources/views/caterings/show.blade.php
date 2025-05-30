@@ -42,7 +42,7 @@
 
                     <div class="col-md-5">
                         <div class="catering-sidebar">
-                            <h3 class="mb-4" style="color: #4a6b5a;">Informacje o katingu</h3>
+                            <h3 class="mb-4" style="color: #4a6b5a;">Informacje o kateringu</h3>
                             <p class="price-tag-detail">{{ htmlspecialchars(number_format($catering->price ?? 0, 2, ',', ' ')) }} zł</p>
 
                             {{-- FORMULARZ DODAWANIA DO KOSZYKA --}}
