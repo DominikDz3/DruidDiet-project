@@ -870,3 +870,115 @@ header .dropdown-logout-btn:hover {
         font-size: .65rem;
     }
 }
+
+.comments-section {
+    margin-top: 2rem;
+}
+
+.comment-card {
+    background-color: var(--card-bg);
+    /* Używa zmiennej dla tła karty */
+    border: 1px solid var(--card-border);
+    /* Używa zmiennej dla ramki karty */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.add-comment-form h5 {
+    color: var(--heading-color);
+}
+
+.comment-author {
+    font-weight: bold;
+    color: var(--heading-color);
+    /* Używa zmiennej dla koloru nagłówka */
+}
+
+.comment-date {
+    font-size: 0.85em;
+    color: var(--text-color-p);
+    /* Używa zmiennej dla koloru tekstu akapitu */
+}
+
+.comment-body {
+    margin-top: 0.5rem;
+    color: var(--text-color);
+    /* Używa zmiennej dla głównego koloru tekstu */
+    line-height: 1.5;
+    white-space: pre-wrap;
+    /* Zachowuje entery z textarea */
+}
+
+/* Stylizacja gwiazdek do oceny */
+.rating-stars {
+    direction: rtl;
+    /* Gwiazdki od prawej do lewej dla łatwiejszego :hover ~ span */
+    display: inline-block;
+    /* Aby nie zajmowały całej szerokości */
+}
+
+.rating-stars input[type="radio"] {
+    display: none;
+    /* Ukryj faktyczne radio buttony */
+}
+
+.rating-stars label {
+    color: #ccc;
+    /* Domyślny kolor nieaktywnej gwiazdki */
+    font-size: 1.8rem;
+    /* Rozmiar gwiazdek w formularzu */
+    padding: 0 0.1em;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+/* Kolorowanie gwiazdek przy najechaniu i zaznaczeniu */
+.rating-stars input[type="radio"]:checked~label,
+/* Gwiazdki przed zaznaczoną (i ona sama) */
+.rating-stars label:hover,
+.rating-stars label:hover~label {
+    color: #ffc107;
+    /* Bootstrapowy żółty dla aktywnych/hoverowanych gwiazdek */
+}
+
+/* Upewnij się, że tylko faktycznie zaznaczone przez :checked pozostają żółte po zdjęciu kursora */
+.rating-stars input[type="radio"]:not(:checked)~label {
+    /* To jest skomplikowane bez JS do czyszczenia hover, prostsze jest poleganie na JS dla precyzyjnego stanu */
+}
+
+
+/* Gwiazdki do wyświetlania istniejącej oceny (bez interakcji) */
+.display-rating-stars span {
+    font-size: 1.1rem;
+    /* Mniejsze gwiazdki dla wyświetlania */
+    color: #ccc;
+}
+
+.display-rating-stars span.filled {
+    color: #ffc107;
+}
+
+/* Średnia ocena */
+.average-rating-stars span {
+    font-size: 1.2rem;
+    /* Dostosuj rozmiar */
+    color: #ffc107;
+    /* Zawsze wypełnione na żółto, jeśli są */
+}
+
+.average-rating-stars span.empty {
+    color: #ccc;
+    /* Puste gwiazdki dla średniej */
+}
+
+/* Poprawki dla alertów, jeśli używane w formularzu komentarzy */
+.add-comment-form .alert {
+    margin-bottom: 1rem;
+}
+
+.add-comment-form .alert ul {
+    margin-bottom: 0;
+    padding-left: 1.2rem;
+}

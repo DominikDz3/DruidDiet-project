@@ -15,7 +15,11 @@ use App\Http\Controllers\TOTPController;
 use App\Http\Controllers\Admin\AdminCateringController;
 use App\Http\Controllers\CalculatorDashboardController;
 use App\Http\Controllers\DeliveryZonesController;
+use App\Http\Controllers\CommentController;
 
+Route::post('/caterings/{catering}/comments', [CommentController::class, 'store'])
+    ->name('comments.store')
+    ->middleware('auth');
 
 // Strona główna
 Route::get('/', function () {
