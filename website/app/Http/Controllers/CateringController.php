@@ -123,7 +123,14 @@ class CateringController extends Controller
 
     public function show(Catering $catering)
     {
-        return view('caterings.show', compact('catering'));
+        $catering->load(['comments' => function ($query) {
+            $query->with('user')->orderBy('created_at', 'desc');
+        }]);
+
+        $averageRating = $catering->comments->avg('rating');
+        $totalRatings = $catering->comments->count();
+
+        return view('caterings.show', compact('catering', 'averageRating', 'totalRatings'));
     }
 
     public function store(Request $request)

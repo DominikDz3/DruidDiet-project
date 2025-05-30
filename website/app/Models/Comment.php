@@ -19,8 +19,14 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
-    public function diet_id(): BelongsTo
+    public function diet(): BelongsTo // Zmieniono nazwę z diet_id() dla spójności
     {
         return $this->belongsTo(Diet::class, 'diet_id', 'diet_id');
+    }
+
+    // DODANA RELACJA
+    public function catering(): BelongsTo
+    {
+        return $this->belongsTo(Catering::class, 'catering_id', 'catering_id');
     }
 }
