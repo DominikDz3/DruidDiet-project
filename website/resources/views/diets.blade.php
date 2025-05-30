@@ -2,148 +2,7 @@
 
 @section('title', 'Nasze Diety - DruidDiet')
 
-@push('styles')
-<style>
-    .diet-card {
-        border: 1px solid #e9ecef;
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        background-color: #fff;
-    }
-    .diet-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-    }
-    .diet-card .card-img-top {
-        height: 200px;
-        object-fit: cover;
-    }
-    .card-title {
-        color: #4a6b5a;
-    }
-    .button {
-        display: inline-block;
-        background-color: #8b5a2b !important;
-        color: #fff !important;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        border: none;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .button:hover {
-        background-color: #6b4320 !important;
-        transform: scale(1.05);
-        color: #fff !important;
-    }
-    .price-tag {
-        color: #333;
-    }
-    .filters-and-sort {
-        background-color: #f8f9fa;
-        overflow: hidden;
-        max-height: 0;
-        opacity: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-bottom: 0;
-        border-width: 0;
-        transition: max-height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
-                    opacity 0.3s ease-out,
-                    padding-top 0.4s ease-out,
-                    padding-bottom 0.4s ease-out,
-                    margin-bottom 0.4s ease-out,
-                    border-width 0.1s ease-out;
-    }
-    .filters-and-sort.open {
-        max-height: 1000px;
-        opacity: 1;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        margin-bottom: 1.5rem;
-        border-width: 1px;
-    }
-    .filters-and-sort .form-label {
-        font-size: 0.9rem;
-        margin-bottom: 0.25rem;
-        color: #4a6b5a;
-    }
-    .filters-and-sort .form-control-sm, .filters-and-sort .form-select-sm, .filters-and-sort .form-range {
-        font-size: 0.9rem;
-    }
-    .toggle-buttons .btn {
-        color: #4a6b5a;
-        border-color: #4a6b5a;
-        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    }
-    .toggle-buttons .btn:hover {
-        background-color: #4a6b5a;
-        color: #fff;
-    }
-    .toggle-buttons .btn.active {
-        background-color: #4a6b5a;
-        color: #fff !important;
-        border-color: #4a6b5a;
-    }
-    #filterOptionsContainer, #sortOptionsContainer {
-        display: none;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out 0.1s;
-    }
-    #filterOptionsContainer.visible, #sortOptionsContainer.visible {
-        display: block;
-        opacity: 1;
-    }
-    .range-value-display {
-        font-weight: bold;
-        color: #8b5a2b;
-    }
-    .form-range {
-        margin-top: 0.1rem;
-        width: 100%;
-    }
-    .form-label.range-label {
-         display: block;
-         margin-bottom: 0.1rem;
-    }
-    .pagination .page-link {
-        color: #4a6b5a;
-    }
-    .pagination .page-item.active .page-link {
-        background-color: #4a6b5a;
-        border-color: #4a6b5a;
-        color: #fff;
-    }
-    .pagination .page-item.disabled .page-link {
-        color: #6c757d;
-    }
-    .bmi-calculator-section {
-        background-color: #e9f5ee;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-        border: 1px solid #cce8d8;
-    }
-    .bmi-calculator-section h3 {
-        color: #4a6b5a;
-        margin-bottom: 1rem;
-    }
-    .bmi-result-display {
-        margin-top: 1rem;
-        padding: 1rem;
-        background-color: #fff;
-        border: 1px dashed #4a6b5a;
-        border-radius: 5px;
-        text-align: center;
-    }
-    .bmi-result-display strong {
-        font-size: 1.2em;
-        color: #8b5a2b;
-    }
-    .form-check-inline { /* Dodane dla lepszego ułożenia checkboxów BMI */
-        margin-right: 1rem;
-    }
-</style>
-@endpush
+{{-- Sekcja @push('styles') została usunięta --}}
 
 @section('content')
 <main class="container mt-5">
@@ -152,7 +11,7 @@
     <section class="bmi-calculator-section shadow-sm">
         <h3 class="text-center">Dopasuj dietę do siebie - oblicz BMI!</h3>
         <form method="GET" action="{{ route('diets.index') }}" id="bmiAndFilterForm" class="row g-3 justify-content-center align-items-end">
-            {{-- Ukryte pola dla istniejących filtrów ogólnych, aby nie resetować ich przy operacjach BMI --}}
+            {{-- Ukryte pola dla istniejących filtrów ogólnych --}}
             @foreach (collect($currentFilters)->except(['height_bmi', 'weight_bmi', 'page', 'save_bmi_result', 'use_saved_bmi']) as $key => $value)
                 @if(is_array($value))
                     @foreach($value as $v_key => $v_value)
@@ -175,7 +34,7 @@
                 <button type="submit" class="btn button btn-sm w-100"><i class="bi bi-calculator"></i> Oblicz i Filtruj</button>
             </div>
 
-            @auth {{-- Opcje zapisu i użycia zapisanego BMI tylko dla zalogowanych --}}
+            @auth
                 <div class="col-12 mt-2 text-center">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" name="save_bmi_result" id="save_bmi_result" value="1" {{ (old('save_bmi_result') || ($heightInput && $weightInput && ($currentFilters['save_bmi_result'] ?? false)) ) ? 'checked' : '' }} >
@@ -196,10 +55,9 @@
             @endauth
         </form>
 
-        {{-- Wyświetlanie wyniku BMI --}}
         @if(isset($calculatedBmi) && $calculatedBmi > 0)
             <div class="bmi-result-display">
-                @if($currentFilters['use_saved_bmi'] ?? false) {{-- Sprawdzamy, czy filtr "użyj zapisanego" był aktywny --}}
+                @if($currentFilters['use_saved_bmi'] ?? false)
                     Wykorzystano zapisany wynik BMI:
                 @else
                     Twoje obliczone BMI:
@@ -214,20 +72,17 @@
                     <br><small>Wyświetlono diety sugerowane dla kategorii: <strong>{{ $bmiCategory }}</strong>.</small>
                 @endif
             </div>
-        @elseif ((request()->filled('height_bmi') && request()->filled('weight_bmi'))) {{-- Jeśli były dane, ale nie udało się obliczyć --}}
+        @elseif ((request()->filled('height_bmi') && request()->filled('weight_bmi')))
             <div class="bmi-result-display text-danger">
                 Nie udało się obliczyć BMI. Sprawdź wprowadzone dane.
             </div>
         @elseif (Auth::check() && isset($latestUserBmiResult) && !($currentFilters['use_saved_bmi'] ?? false) && !(request()->filled('height_bmi') && request()->filled('weight_bmi')))
-            {{-- Informacja o ostatnim zapisanym BMI, jeśli nic innego nie jest aktywne --}}
              <div class="bmi-result-display text-info">
                 Twój ostatni zapisany wynik BMI to: <strong>{{ number_format($latestUserBmiResult->bmi_value, 2) }}</strong>
                 z dnia {{ \Carbon\Carbon::parse($latestUserBmiResult->created_at)->format('d.m.Y') }}. Możesz go użyć zaznaczając powyższą opcję lub wprowadzić nowe dane do obliczenia.
             </div>
         @endif
     </section>
-    {{-- KONIEC SEKCJI KALKULATORA BMI --}}
-
 
     <div class="d-flex justify-content-end gap-2 mb-3 toggle-buttons">
         <button class="btn btn-outline-secondary btn-sm" type="button" id="toggleFiltersButton">
@@ -241,11 +96,10 @@
     <section class="filters-and-sort border rounded shadow-sm" id="filtersAndSortSection">
         <div class="filters-and-sort-content p-3">
             <form method="GET" action="{{ route('diets.index') }}" class="row g-3 align-items-start">
-                {{-- Przekazanie parametrów BMI (jeśli są aktywne z formularza głównego), aby nie zniknęły przy stosowaniu innych filtrów z tej sekcji --}}
                 @if(request()->filled('height_bmi') && request()->filled('weight_bmi') && !request()->boolean('use_saved_bmi'))
                     <input type="hidden" name="height_bmi" value="{{ request('height_bmi') }}">
                     <input type="hidden" name="weight_bmi" value="{{ request('weight_bmi') }}">
-                    @if(request()->boolean('save_bmi_result')) {{-- Zachowaj stan checkboxa zapisu --}}
+                    @if(request()->boolean('save_bmi_result'))
                         <input type="hidden" name="save_bmi_result" value="1">
                     @endif
                 @elseif(request()->boolean('use_saved_bmi'))
@@ -253,9 +107,8 @@
                 @endif
 
                 <div class="col-12" id="filterOptionsContainer">
-                    <h5 class="mb-3" style="color: #4a6b5a;">Filtruj Diety</h5>
+                    <h5 class="mb-3">Filtruj Diety</h5> {{-- Usunięto styl inline --}}
                     <div class="row g-3">
-                        {{-- Filtry Kalorii --}}
                         @if(!((isset($calculatedBmi) && $calculatedBmi > 0) || ($currentFilters['use_saved_bmi'] ?? false)))
                         <div class="col-md-6">
                             <label class="form-label range-label">Kalorie: <span id="min_calories_value" class="range-value-display">{{ $currentFilters['min_calories'] ?? 500 }}</span> - <span id="max_calories_value" class="range-value-display">{{ $currentFilters['max_calories'] ?? 4000 }}</span> kcal</label>
@@ -298,7 +151,7 @@
                 </div>
 
                 <div class="col-12 mt-3" id="sortOptionsContainer">
-                    <h5 class="mb-3" style="color: #4a6b5a;">Sortuj Diety</h5>
+                    <h5 class="mb-3">Sortuj Diety</h5> {{-- Usunięto styl inline --}}
                     <div class="row g-3">
                         <div class="col-md-8 col-lg-6">
                             <label for="sort_option" class="form-label">Sortuj według:</label>
@@ -322,7 +175,7 @@
     </section>
 
     <section class="diets-list mb-5">
-        <h2 class="text-center mb-4" style="color: #4a6b5a;">
+        <h2 class="text-center mb-4"> {{-- Usunięto styl inline --}}
             @if(isset($calculatedBmi) && $calculatedBmi > 0 && $bmiCategory)
                  @if($currentFilters['use_saved_bmi'] ?? false)
                     Diety sugerowane dla zapisanego BMI: {{ number_format($calculatedBmi, 2) }} ({{$bmiCategory}})
@@ -337,7 +190,7 @@
             @if(isset($diets) && $diets->count() > 0)
                 @foreach ($diets as $diet)
                     <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 shadow-sm diet-card">
+                        <div class="card h-100 shadow-sm diet-card"> {{-- Klasa .diet-card będzie stylizowana w nordic.css --}}
                             <img src="https://via.placeholder.com/300x200.png?text={{ urlencode(htmlspecialchars($diet->title ?? 'Dieta')) }}" class="card-img-top" alt="{{ htmlspecialchars($diet->title ?? 'Dieta') }}">
                             <div class="card-body d-flex flex-column">
                                 <h4 class="card-title">{{ htmlspecialchars($diet->title ?? 'Brak tytułu') }}</h4>
@@ -385,6 +238,7 @@
 @endsection
 
 @push('scripts')
+{{-- Skrypty pozostają bez zmian, zakładając, że nie manipulują stylami w sposób konfliktowy --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         function setupRangeSliderPair(minRangeEl, maxRangeEl, minHiddenEl, maxHiddenEl, minDisplayEl, maxDisplayEl, decimalPlaces = 0) {
@@ -423,7 +277,6 @@
 
         const minCaloriesRange = document.getElementById('min_calories_range');
         const maxCaloriesRange = document.getElementById('max_calories_range');
-        // Tylko inicjuj suwaki kalorii, jeśli są faktycznie w DOM (nie są ukryte przez PHP)
         if (minCaloriesRange && maxCaloriesRange) {
             setupRangeSliderPair(
                 minCaloriesRange, maxCaloriesRange,
@@ -517,7 +370,6 @@
             console.warn('Jeden lub więcej elementów dla przełączania filtrów/sortowania nie zostało znalezionych.');
         }
 
-        // Logika dla checkboxów BMI
         const saveBmiCheckbox = document.getElementById('save_bmi_result');
         const useSavedBmiCheckbox = document.getElementById('use_saved_bmi');
         const heightBmiInput = document.getElementById('height_bmi');
@@ -527,19 +379,15 @@
             useSavedBmiCheckbox.addEventListener('change', function() {
                 if (this.checked) {
                     if (saveBmiCheckbox) {
-                        saveBmiCheckbox.checked = false; // Odznacz zapis, jeśli używamy zapisanego
-                        saveBmiCheckbox.disabled = true; // I zablokuj
+                        saveBmiCheckbox.checked = false;
+                        saveBmiCheckbox.disabled = true;
                     }
-                    // Blokowanie pól height/weight, gdy używamy zapisanego BMI
                     if (heightBmiInput) heightBmiInput.disabled = true;
                     if (weightBmiInput) weightBmiInput.disabled = true;
-                    // Można dodać automatyczne wysłanie formularza, jeśli taka jest preferencja
-                    // document.getElementById('bmiAndFilterForm').submit();
                 } else {
-                     // Odblokuj, jeśli odznaczono "użyj zapisanego"
                     if (heightBmiInput) heightBmiInput.disabled = false;
                     if (weightBmiInput) weightBmiInput.disabled = false;
-                    if (saveBmiCheckbox) { // Odblokuj też checkbox zapisu
+                    if (saveBmiCheckbox) {
                        saveBmiCheckbox.disabled = !(heightBmiInput && heightBmiInput.value && weightBmiInput && weightBmiInput.value);
                     }
                 }
@@ -547,11 +395,11 @@
         }
 
         function toggleSaveBmiAvailability() {
-            if (saveBmiCheckbox) { // Sprawdź czy element istnieje (dla niezalogowanych nie będzie)
+            if (saveBmiCheckbox) {
                 if (heightBmiInput && weightBmiInput && heightBmiInput.value && weightBmiInput.value) {
                     saveBmiCheckbox.disabled = false;
-                    if (useSavedBmiCheckbox) useSavedBmiCheckbox.checked = false; // Odznacz "użyj zapisanego"
-                    if (heightBmiInput) heightBmiInput.disabled = false; // Upewnij się, że pola są aktywne
+                    if (useSavedBmiCheckbox) useSavedBmiCheckbox.checked = false;
+                    if (heightBmiInput) heightBmiInput.disabled = false;
                     if (weightBmiInput) weightBmiInput.disabled = false;
                 } else {
                     saveBmiCheckbox.disabled = true;
@@ -561,9 +409,8 @@
 
         if (heightBmiInput) heightBmiInput.addEventListener('input', toggleSaveBmiAvailability);
         if (weightBmiInput) weightBmiInput.addEventListener('input', toggleSaveBmiAvailability);
-        toggleSaveBmiAvailability(); // Sprawdź stan przy załadowaniu
+        toggleSaveBmiAvailability();
 
-        // Jeśli "use_saved_bmi" jest zaznaczone przy ładowaniu (np. z GET parametru), zablokuj pola
         if (useSavedBmiCheckbox && useSavedBmiCheckbox.checked) {
             if (saveBmiCheckbox) {
                 saveBmiCheckbox.checked = false;
@@ -572,7 +419,6 @@
             if (heightBmiInput) heightBmiInput.disabled = true;
             if (weightBmiInput) weightBmiInput.disabled = true;
         }
-
     });
 </script>
 @endpush

@@ -2,15 +2,13 @@
 
 @section('title', htmlspecialchars($catering->title ?? 'Szczegóły Kateringu'))
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('public/css/nordic.css') }}">
-@endpush
+{{-- Usunięto @push('styles') z błędnym linkiem do nordic.css --}}
 
 @section('content')
 <main class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
-            <div class="catering-detail-container">
+            <div class="catering-detail-container"> {{-- Klasa do ostylowania w nordic.css --}}
                 <div class="row">
                     <div class="col-md-7">
                         <div class="catering-image-wrapper">
@@ -25,27 +23,26 @@
                             <h2 class="card-title-detail">{{ ($catering->title ?? 'Brak tytułu') }}</h2>
                             <p class="text-muted"><small><strong>Typ:</strong> {{ htmlspecialchars($catering->type ?? 'N/A') }}</small></p>
 
-                            <h5 class="mt-4" style="color: #4a6b5a;">Opis:</h5>
+                            <h5 class="mt-4">Opis:</h5> {{-- Usunięto styl inline --}}
                             <p class="card-text fs-5">{{ nl2br(htmlspecialchars($catering->description ?? 'Brak opisu.')) }}</p>
 
                             @if (!empty($catering->elements))
-                                <h5 class="mt-4" style="color: #4a6b5a;">Skład:</h5>
+                                <h5 class="mt-4">Skład:</h5> {{-- Usunięto styl inline --}}
                                 <p class="card-text">{{ ($catering->elements) }}</p>
                             @endif
 
                             @if (!empty($catering->allergens))
-                                <h5 class="mt-4" style="color: #d9534f;">Alergeny:</h5>
+                                <h5 class="mt-4 text-danger">Alergeny:</h5> {{-- Zmieniono styl inline na klasę Bootstrap text-danger --}}
                                 <p class="card-text text-danger fw-bold">{{ htmlspecialchars($catering->allergens) }}</p>
                             @endif
                         </div>
                     </div>
 
                     <div class="col-md-5">
-                        <div class="catering-sidebar">
-                            <h3 class="mb-4" style="color: #4a6b5a;">Informacje o kateringu</h3>
+                        <div class="catering-sidebar"> {{-- Klasa do ostylowania w nordic.css --}}
+                            <h3 class="mb-4">Informacje o kateringu</h3> {{-- Usunięto styl inline --}}
                             <p class="price-tag-detail">{{ htmlspecialchars(number_format($catering->price ?? 0, 2, ',', ' ')) }} zł</p>
 
-                            {{-- FORMULARZ DODAWANIA DO KOSZYKA --}}
                             <form action="{{ route('cart.add') }}" method="POST" class="mb-3">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $catering->catering_id }}">
@@ -59,7 +56,7 @@
                                 </button>
                             </form>
 
-                            <hr>
+                            <hr class="themed-hr"> {{-- Dodana klasa dla HR --}}
 
                             <div class="mt-3">
                                 <p class="mb-1"><small>Dostępność: <span class="text-success fw-bold">Dostępny</span></small></p>
