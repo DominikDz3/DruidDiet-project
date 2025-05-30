@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminCateringController;
 use App\Http\Controllers\CalculatorDashboardController;
 use App\Http\Controllers\DeliveryZonesController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Admin\AdminCommentController;
 
 Route::post('/caterings/{catering}/comments', [CommentController::class, 'store'])
     ->name('comments.store')
@@ -103,5 +104,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('coupons/random-user-form', [AdminCouponController::class, 'showRandomUserForm'])->name('coupons.randomUserForm');
         Route::post('coupons/generate-for-random-user', [AdminCouponController::class, 'generateForRandomUser'])->name('coupons.generateForRandomUser');
         Route::resource('coupons', AdminCouponController::class);
+
+        //Zarządzanie komentarzami/ocenami
+        Route::get('/comments', [AdminCommentController::class, 'index'])->name('comments.index');
+        Route::delete('/comments/{comment}', [AdminCommentController::class, 'destroy'])->name('comments.destroy');
     });
 });
