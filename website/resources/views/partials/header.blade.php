@@ -5,6 +5,7 @@
                     <li class="nav-item"><a href="{{  route('home') }}">O nas</a></li>
                     <li class="nav-item"><a href="{{  route('diets.index') }}">Diety</a></li>
                     <li class="nav-item"><a href="{{  route('caterings.index') }}">Catering</a></li>
+                    <li class="nav-item"><a href="{{ route('delivery-zones.index') }}">Strefy dostaw</a></li>
                     <li class="nav-item"><a href="#">Kontakt</a></li>
                 </ul>
 

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\TOTPController;
 use App\Http\Controllers\Admin\AdminCateringController;
 use App\Http\Controllers\CalculatorDashboardController;
+use App\Http\Controllers\DeliveryZonesController;
 
 
 // Strona główna
@@ -41,6 +42,8 @@ Route::get('/caterings/{catering}', [App\Http\Controllers\CateringController::cl
 // Ścieżka do wyświetlania listy diet
 Route::get('/diety', [DietController::class, 'index'])->name('diets.index');
 
+// Ścieżka do stref dostaw
+Route::get('/strefy-dostaw', [DeliveryZonesController::class, 'index'])->name('delivery-zones.index');
 
 //Trasy koszyka
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
