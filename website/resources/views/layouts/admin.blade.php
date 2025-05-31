@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'DruidDiet - Panel Administratora')</title>
 
-    <link rel="stylesheet" href="{{ asset('css/nordic.css') }}"> <link rel="stylesheet" href="{{ asset('css/admin.css') }}"> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/nordic.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     @stack('styles')
@@ -37,6 +39,10 @@
                     </a>
                     <a href="{{ route('admin.caterings.index') }}" class="nav-link {{ request()->routeIs('admin.caterings*') ? 'active' : '' }}">
                         <i class="fas fa-box-open me-2"></i> Kateringi
+                    </a>
+                    {{-- NOWY LINK DO KOMENTARZY --}}
+                    <a href="{{ route('admin.comments.index') }}" class="nav-link {{ request()->routeIs('admin.comments*') ? 'active' : '' }}">
+                        <i class="fas fa-comments me-2"></i> Komentarze i Oceny
                     </a>
                     <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->routeIs('admin.orders*') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart me-2"></i> Zamówienia
