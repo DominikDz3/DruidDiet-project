@@ -71,25 +71,35 @@
         </div>
 
         <div class="row justify-content-end mt-4">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Podsumowanie Koszyka</h5>
-                        <p class="card-text d-flex justify-content-between">
-                            <span>Łącznie:</span>
-                            <strong>{{ number_format($totalPrice, 2, ',', ' ') }} zł</strong>
-                        </p>
-                        <hr>
-                        <div class="d-grid gap-2">
-                            <a href="#" class="btn btn-success">Przejdź do kasy (Wkrótce)</a>
-                            <form action="{{ route('cart.clear') }}" method="POST" class="d-grid">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger">Wyczyść Koszyk</button>
-                            </form>
-                        </div>
-                    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Podsumowanie Koszyka</h5>
+                <p class="card-text d-flex justify-content-between">
+                    <span>Łącznie:</span>
+                    <strong>{{ number_format($totalPrice, 2, ',', ' ') }} zł</strong>
+                </p>
+                <hr>
+                <div class="d-grid gap-2">
+
+                    <form action="{{ route('checkout.store') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-success w-100">Złóż zamówienie</button>
+                    </form>
+                    
+
+                    <form action="{{ route('cart.clear') }}" method="POST" class="d-grid">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger">Wyczyść Koszyk</button>
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+     <a href="{{ route('home') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Kontynuuj zakupy</a>
+</div>
         </div>
         <div class="mt-4">
              <a href="{{ route('home') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Kontynuuj zakupy</a>
