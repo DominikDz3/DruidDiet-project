@@ -18,14 +18,19 @@ use App\Http\Controllers\DeliveryZonesController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\AdminCommentController;
 
+use App\Http\Controllers\HomeController;
+
 Route::post('/caterings/{catering}/comments', [CommentController::class, 'store'])
     ->name('comments.store')
     ->middleware('auth');
 
-// Strona główna
-Route::get('/', function () {
-    return view('main');
-})->name('home');
+// // Strona główna
+// Route::get('/', function () {
+//     return view('main');
+// })->name('home');
+
+//Zmieniona trasa strony głównej z wykorzystaniem HomeController
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Trasy autoryzacyjne
 Route::controller(AuthController::class)->group(function () {
