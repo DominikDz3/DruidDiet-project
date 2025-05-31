@@ -19,6 +19,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\AdminCommentController;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CheckoutController;
 
 Route::post('/caterings/{catering}/comments', [CommentController::class, 'store'])
     ->name('comments.store')
@@ -69,6 +70,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/user/profile/update', [UserProfileController::class, 'update'])->name('user.profile.update');
 
     Route::get('/user/my-coupons', [UserProfileController::class, 'myCoupons'])->name('user.myCoupons');
+
+    //Trasa do składania zamówienia
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
     //kalkulatory
     Route::get('/kalkulatory', [CalculatorDashboardController::class, 'showAllCalculators'])->name('calculators.index');
