@@ -12,7 +12,13 @@ class Order extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id', 'order_date', 'total_price', 'status'
+        'user_id',
+        'order_date',
+        'total_price',
+        'status',
+        'payment_method',
+        'points_used',
+        'points_earned'   
     ];
 
     public function user(): BelongsTo

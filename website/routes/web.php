@@ -63,6 +63,9 @@ Route::patch('/cart/update/{cartItemId}', [CartController::class, 'update'])->na
 Route::delete('/cart/remove/{cartItemId}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
+Route::post('/cart/coupon/apply', [CartController::class, 'applyCoupon'])->name('cart.coupon.apply');
+Route::post('/cart/coupon/remove', [CartController::class, 'removeCoupon'])->name('cart.coupon.remove');
+
 // Trasy dostępne tylko po zalogowaniu
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/dashboard', [UserProfileController::class, 'edit'])->name('user.dashboard');
