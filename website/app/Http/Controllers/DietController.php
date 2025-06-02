@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Diet;
-use App\Models\BmiResult; 
+use App\Models\BmiResult;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -12,103 +12,105 @@ class DietController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Diet::query();
-        $calculatedBmi = null;
-        $bmiCategory = null;
         $user = Auth::user();
         $latestUserBmiResult = null;
+        $bmiDisplayData = ['value' => null, 'category' => null, 'source' => null, 'date' => null, 'alertClass' => 'alert-info'];
+        $suggestedDiets = collect(); // Pusta kolekcja na start dla sugerowanych diet
 
-        $heightInput = $request->input('height_bmi');
-        $weightInput = $request->input('weight_bmi');
-        $shouldSaveBmi = $request->boolean('save_bmi_result'); 
-        $useSavedBmi = $request->boolean('use_saved_bmi'); 
+        $bmiFromSession = $request->session()->get('bmiResultDataForDiets');
 
         if ($user) {
-            $latestUserBmiResult = $user->bmiResults()->latest('created_at')->first(); 
+            $latestUserBmiResult = $user->bmiResults()->latest('created_at')->first();
         }
 
-        if ($request->filled('height_bmi') && $request->filled('weight_bmi')) {
-            $height = (float) $heightInput;
-            $weight = (float) $weightInput;
-
-            if ($height > 0 && $weight > 0) {
-                $calculatedBmi = $weight / ($height * $height);
-
-                if ($user && $shouldSaveBmi) {
-                    BmiResult::create([
-                        'user_id' => $user->user_id, //
-                        'bmi_value' => $calculatedBmi,
-                        'created_at' => Carbon::now()
-                    ]);
-                    $latestUserBmiResult = $user->bmiResults()->latest('created_at')->first();
-                }
-            }
-        } elseif ($user && $useSavedBmi && $latestUserBmiResult) {
-            $calculatedBmi = $latestUserBmiResult->bmi_value;
+        // Ustalenie aktywnego BMI do filtrowania sugestii
+        $activeBmiValueForSuggestions = null;
+        if ($bmiFromSession && isset($bmiFromSession['value']) && $bmiFromSession['value'] > 0) {
+            $activeBmiValueForSuggestions = $bmiFromSession['value'];
+            $bmiDisplayData['value'] = $bmiFromSession['value'];
+            $bmiDisplayData['category'] = $bmiFromSession['category'] ?? $this->getBmiCategory($bmiFromSession['value']);
+            $bmiDisplayData['alertClass'] = $bmiFromSession['alertClass'] ?? $this->getBmiAlertClass($bmiFromSession['value']);
+            $bmiDisplayData['source'] = 'session';
+            $bmiDisplayData['date'] = $bmiFromSession['calculation_date'] ?? Carbon::now();
+            // $request->session()->forget('bmiResultDataForDiets'); // Można odkomentować, by użyć tylko raz
+        } elseif ($latestUserBmiResult && $latestUserBmiResult->bmi_value > 0) {
+            $activeBmiValueForSuggestions = $latestUserBmiResult->bmi_value;
+            $bmiDisplayData['value'] = $latestUserBmiResult->bmi_value;
+            $bmiDisplayData['category'] = $this->getBmiCategory($latestUserBmiResult->bmi_value);
+            $bmiDisplayData['alertClass'] = $this->getBmiAlertClass($latestUserBmiResult->bmi_value);
+            $bmiDisplayData['source'] = 'database';
+            $bmiDisplayData['date'] = $latestUserBmiResult->created_at;
         }
 
-        if ($calculatedBmi && $calculatedBmi > 0) {
-            if ($calculatedBmi < 18.5) {
-                $query->where('calories', '>=', 2500);
-                $bmiCategory = 'Niedowaga';
-            } elseif ($calculatedBmi >= 18.5 && $calculatedBmi < 25) {
-                $query->whereBetween('calories', [1800, 2500]);
-                $bmiCategory = 'Waga prawidłowa';
-            } elseif ($calculatedBmi >= 25 && $calculatedBmi < 30) {
-                $query->where('calories', '<=', 2000);
-                $bmiCategory = 'Nadwaga';
-            } else { 
-                $query->where('calories', '<=', 1800);
-                $bmiCategory = 'Otyłość';
-            }
+        // Pobieranie sugerowanych diet, jeśli mamy aktywne BMI
+        if ($activeBmiValueForSuggestions) {
+            $suggestedQuery = Diet::query();
+            if ($activeBmiValueForSuggestions < 18.5) { $suggestedQuery->where('calories', '>=', 2500); }
+            elseif ($activeBmiValueForSuggestions < 25) { $suggestedQuery->whereBetween('calories', [1800, 2500]); }
+            elseif ($activeBmiValueForSuggestions < 30) { $suggestedQuery->where('calories', '<=', 2000); }
+            else { $suggestedQuery->where('calories', '<=', 1800); }
+            
+            // Możesz chcieć ograniczyć liczbę sugerowanych diet lub dodać losową kolejność
+            $suggestedDiets = $suggestedQuery->inRandomOrder()->limit(3)->get(); // Np. 3 losowe sugerowane
         }
 
-        if (!($calculatedBmi && $calculatedBmi > 0)) {
-             if ($request->filled('min_calories')) {
-                $query->where('calories', '>=', $request->input('min_calories'));
-            }
-            if ($request->filled('max_calories')) {
-                $query->where('calories', '<=', $request->input('max_calories'));
-            }
-        }
+        // Zapytanie dla wszystkich diet (z uwzględnieniem filtrów z formularza)
+        $allDietsQuery = Diet::query();
 
-        if ($request->filled('min_price')) {
-            $query->where('price', '>=', $request->input('min_price'));
+        // Standardowe filtrowanie kalorii (dla listy "Wszystkie diety")
+        if ($request->filled('min_calories')) {
+            $allDietsQuery->where('calories', '>=', $request->input('min_calories'));
         }
-        if ($request->filled('max_price')) {
-            $query->where('price', '<=', $request->input('max_price'));
+        if ($request->filled('max_calories')) {
+            $allDietsQuery->where('calories', '<=', $request->input('max_calories'));
         }
-
+        // Pozostałe filtry (cena, typ diety)
+        if ($request->filled('min_price')) { $allDietsQuery->where('price', '>=', $request->input('min_price')); }
+        if ($request->filled('max_price')) { $allDietsQuery->where('price', '<=', $request->input('max_price')); }
         if ($request->filled('diet_type') && $request->input('diet_type') != 'all') {
-            $query->where('type', $request->input('diet_type'));
+            $allDietsQuery->where('type', $request->input('diet_type'));
         }
 
+        // Sortowanie dla listy "Wszystkie diety"
         $sortOption = $request->input('sort_option', 'title_asc');
-        $sortParts = explode('_', $sortOption);
-        $sortBy = $sortParts[0] ?? 'title';
-        $sortDirection = $sortParts[1] ?? 'asc';
+        [$sortBy, $sortDirection] = explode('_', $sortOption, 2) + ['title', 'asc'];
         $allowedSortColumns = ['title', 'price', 'calories'];
         $allowedSortDirections = ['asc', 'desc'];
 
         if (in_array($sortBy, $allowedSortColumns) && in_array($sortDirection, $allowedSortDirections)) {
-            $query->orderBy($sortBy, $sortDirection);
+            $allDietsQuery->orderBy($sortBy, $sortDirection);
         } else {
-            $query->orderBy('title', 'asc');
+            $allDietsQuery->orderBy('title', 'asc');
         }
 
-        $diets = $query->paginate(9)->appends($request->except('page'));
-
+        $allDiets = $allDietsQuery->paginate(9)->appends($request->except('page'));
         $dietTypes = Diet::distinct()->pluck('type')->filter()->sort()->values();
 
         return view('diets', [
-            'diets' => $diets,
+            'suggestedDiets' => $suggestedDiets, // Nowa zmienna dla sugerowanych diet
+            'allDiets' => $allDiets,             // Zmieniono nazwę z 'diets' dla jasności
             'dietTypes' => $dietTypes,
-            'currentFilters' => $request->only(['min_calories', 'max_calories', 'min_price', 'max_price', 'diet_type', 'sort_option', 'height_bmi', 'weight_bmi', 'save_bmi_result', 'use_saved_bmi']),
-            'calculatedBmi' => $calculatedBmi, 
-            'bmiCategory' => $bmiCategory,
-            'heightInput' => $heightInput, 
-            'weightInput' => $weightInput, 
-            'latestUserBmiResult' => $latestUserBmiResult, 
+            'currentFilters' => $request->only(['min_calories', 'max_calories', 'min_price', 'max_price', 'diet_type', 'sort_option']),
+            'latestUserBmiResult' => $latestUserBmiResult,
+            'bmiDisplayData' => $bmiDisplayData,
         ]);
+    }
+
+    private function getBmiCategory($bmiValue)
+    {
+        if (!$bmiValue || $bmiValue <= 0) return 'Brak danych';
+        if ($bmiValue < 18.5) return 'Niedowaga';
+        if ($bmiValue < 25) return 'Waga prawidłowa';
+        if ($bmiValue < 30) return 'Nadwaga';
+        return 'Otyłość';
+    }
+
+    private function getBmiAlertClass($bmiValue)
+    {
+        if (!$bmiValue || $bmiValue <= 0) return 'alert-info';
+        if ($bmiValue < 18.5) return 'alert-warning';
+        if ($bmiValue < 25) return 'alert-success';
+        if ($bmiValue < 30) return 'alert-warning';
+        return 'alert-danger';
     }
 }

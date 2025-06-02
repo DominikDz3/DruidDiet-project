@@ -81,6 +81,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kalkulatory', [CalculatorDashboardController::class, 'showAllCalculators'])->name('calculators.index');
     Route::post('/kalkulatory/zapotrzebowanie-wody', [CalculatorDashboardController::class, 'calculateWaterNeed'])->name('calculators.water.calculator.calculate');
 
+    Route::get('/user/calculators', [CalculatorDashboardController::class, 'showAllCalculators'])->name('calculators.index');
+    Route::post('/user/calculators/water', [CalculatorDashboardController::class, 'calculateWaterNeed'])->name('calculators.water.calculate');
+    Route::post('/user/calculators/bmi', [CalculatorDashboardController::class, 'calculateBmi'])->name('calculators.bmi.calculate');
+
     Route::prefix('user/totp')->name('user.totp.')->group(function () {
         Route::get('/manage', [TOTPController::class, 'showManageForm'])->name('manage');
         Route::get('/setup', [TOTPController::class, 'showSetupForm'])->name('setup');
