@@ -11,7 +11,6 @@
     --header-border: #dddddd;
     --header-link-hover-color: #8b5a2b;
     --card-bg: #ffffff;
-    /* Tło dla kart */
     --card-border: #e9ecef;
     --card-title-color: #4a6b5a;
     --button-primary-bg: #4a6b5a;
@@ -71,11 +70,8 @@
     --header-border: #333333;
     --header-link-hover-color: #ffdd99;
     --card-bg: #1e1e1e;
-    /* Ciemne tło dla kart */
     --card-border: #333333;
-    /* Ciemna ramka dla kart */
     --card-title-color: #a6cfff;
-    /* Jasny tekst tytułu karty */
     --button-primary-bg: #5e8b7e;
     --button-primary-border: #6fa990;
     --button-primary-text: #ffffff;
@@ -168,7 +164,6 @@ hr,
 header.bg-light,
 header {
     background-color: var(--header-bg) !important;
-    /* !important dla pewności nadpisania Bootstrapa */
     color: var(--header-text) !important;
     padding: 1rem 20px;
     border-bottom: 1px solid var(--header-border);
@@ -321,7 +316,6 @@ footer {
 
 .btn-primary {
     background-color: var(--button-primary-bg) !important;
-    /* Może być potrzebne dla Bootstrapa */
     border-color: var(--button-primary-border) !important;
     color: var(--button-primary-text) !important;
 }
@@ -425,29 +419,24 @@ header .dropdown-logout-btn:hover {
     color: var(--dropdown-item-hover-text);
 }
 
-/* --- KLUCZOWA ZMIANA DLA KART DIET I CATERINGÓW --- */
+/* Cards (General, Diet, Catering) */
 .card {
     background-color: var(--card-bg) !important;
-    /* Używamy !important dla pewności */
     border: 1px solid var(--card-border) !important;
     color: var(--text-color) !important;
-    /* Ogólny tekst w karcie */
 }
 
 .card-body {
     color: var(--text-color-p) !important;
-    /* Tekst akapitów w karcie */
 }
 
 .card-title {
     color: var(--card-title-color) !important;
-    /* Tytuły w karcie */
 }
 
 .card-header,
 .card-footer {
     background-color: var(--filters-bg) !important;
-    /* Tło dla nagłówka/stopki karty */
     color: var(--card-title-color) !important;
     border-bottom-color: var(--card-border) !important;
     border-top-color: var(--card-border) !important;
@@ -458,10 +447,8 @@ header .dropdown-logout-btn:hover {
     background-color: color-mix(in srgb, var(--card-bg) 90%, #fff 10%) !important;
 }
 
-/* Specyficzne style dla .diet-card i .catering-card, jeśli nadal potrzebne ponad .card */
 .diet-card,
 .catering-card {
-    /* Już dziedziczą większość z .card. Poniżej tylko unikalne, jeśli są. */
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
@@ -485,8 +472,6 @@ header .dropdown-logout-btn:hover {
 .price-tag {
     color: var(--text-color);
 }
-
-/* Cena w karcie */
 
 
 /* Filters & Sorting Section */
@@ -551,14 +536,28 @@ header .dropdown-logout-btn:hover {
     margin-bottom: 0.1rem;
 }
 
-/* BMI Calculator Section */
-.bmi-calculator-section {
+/* BMI Calculator Section & Info Sections */
+.bmi-calculator-section,
+.suggested-diets-section,
+/* Dodana klasa dla spójności */
+.bmi-info-prompt
+
+/* Dodana klasa dla spójności */
+    {
     background-color: var(--filters-bg);
     padding: 1.5rem;
     border-radius: 8px;
     margin-bottom: 2rem;
     border: 1px solid var(--card-border);
     box-shadow: var(--shadow-sm);
+}
+
+.bmi-calculator-section h3,
+.bmi-calculator-section h5,
+.suggested-diets-section h3,
+.bmi-info-prompt h3 {
+    color: var(--heading-color);
+    margin-bottom: 1rem;
 }
 
 .bmi-result-display {
@@ -574,6 +573,12 @@ header .dropdown-logout-btn:hover {
 .bmi-result-display strong {
     font-size: 1.2em;
     color: var(--button-secondary-bg);
+}
+
+.bmi-result-display .badge {
+    font-size: 0.9em;
+    vertical-align: middle;
+    margin-left: 0.5rem;
 }
 
 .form-check-inline {
@@ -645,7 +650,6 @@ header .dropdown-logout-btn:hover {
     background-color: var(--filters-bg) !important;
 }
 
-/* Ogólne .bg-light, z wyłączeniem nagłówka */
 .bg-white {
     background-color: var(--card-bg) !important;
 }
@@ -835,6 +839,92 @@ header .dropdown-logout-btn:hover {
     background-color: color-mix(in srgb, var(--button-primary-bg) 80%, black);
 }
 
+/* Comments Section Styles */
+.comments-section {
+    margin-top: 2rem;
+}
+
+.comment-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.add-comment-form h5 {
+    color: var(--heading-color);
+}
+
+.comment-author {
+    font-weight: bold;
+    color: var(--heading-color);
+}
+
+.comment-date {
+    font-size: 0.85em;
+    color: var(--text-color-p);
+}
+
+.comment-body {
+    margin-top: 0.5rem;
+    color: var(--text-color);
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.rating-stars {
+    direction: rtl;
+    display: inline-block;
+}
+
+.rating-stars input[type="radio"] {
+    display: none;
+}
+
+.rating-stars label {
+    color: #ccc;
+    font-size: 1.8rem;
+    padding: 0 0.1em;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.rating-stars input[type="radio"]:checked~label,
+.rating-stars label:hover,
+.rating-stars label:hover~label {
+    color: #ffc107;
+}
+
+.display-rating-stars span {
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.display-rating-stars span.filled {
+    color: #ffc107;
+}
+
+.average-rating-stars span {
+    font-size: 1.2rem;
+    color: #ffc107;
+}
+
+.average-rating-stars span.empty {
+    color: #ccc;
+}
+
+.add-comment-form .alert {
+    margin-bottom: 1rem;
+}
+
+.add-comment-form .alert ul {
+    margin-bottom: 0;
+    padding-left: 1.2rem;
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
     header {
@@ -869,111 +959,4 @@ header .dropdown-logout-btn:hover {
     .text-xs {
         font-size: .65rem;
     }
-}
-
-.comments-section {
-    margin-top: 2rem;
-}
-
-.comment-card {
-    background-color: var(--card-bg);
-    /* Używa zmiennej dla tła karty */
-    border: 1px solid var(--card-border);
-    /* Używa zmiennej dla ramki karty */
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 0.25rem;
-    box-shadow: var(--shadow-sm);
-}
-
-.add-comment-form h5 {
-    color: var(--heading-color);
-}
-
-.comment-author {
-    font-weight: bold;
-    color: var(--heading-color);
-    /* Używa zmiennej dla koloru nagłówka */
-}
-
-.comment-date {
-    font-size: 0.85em;
-    color: var(--text-color-p);
-    /* Używa zmiennej dla koloru tekstu akapitu */
-}
-
-.comment-body {
-    margin-top: 0.5rem;
-    color: var(--text-color);
-    /* Używa zmiennej dla głównego koloru tekstu */
-    line-height: 1.5;
-    white-space: pre-wrap;
-    /* Zachowuje entery z textarea */
-}
-
-/* Stylizacja gwiazdek do oceny */
-.rating-stars {
-    direction: rtl;
-    /* Gwiazdki od prawej do lewej dla łatwiejszego :hover ~ span */
-    display: inline-block;
-    /* Aby nie zajmowały całej szerokości */
-}
-
-.rating-stars input[type="radio"] {
-    display: none;
-    /* Ukryj faktyczne radio buttony */
-}
-
-.rating-stars label {
-    color: #ccc;
-    /* Domyślny kolor nieaktywnej gwiazdki */
-    font-size: 1.8rem;
-    /* Rozmiar gwiazdek w formularzu */
-    padding: 0 0.1em;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-/* Kolorowanie gwiazdek przy najechaniu i zaznaczeniu */
-.rating-stars input[type="radio"]:checked~label,
-/* Gwiazdki przed zaznaczoną (i ona sama) */
-.rating-stars label:hover,
-.rating-stars label:hover~label {
-    color: #ffc107;
-    /* Bootstrapowy żółty dla aktywnych/hoverowanych gwiazdek */
-}
-
-
-/* Gwiazdki do wyświetlania istniejącej oceny (bez interakcji) */
-.display-rating-stars span {
-    font-size: 1.1rem;
-    /* Mniejsze gwiazdki dla wyświetlania */
-    color: #ccc;
-}
-
-.display-rating-stars span.filled {
-    color: #ffc107;
-}
-
-/* Średnia ocena */
-.average-rating-stars span {
-    font-size: 1.2rem;
-    /* Dostosuj rozmiar */
-    color: #ffc107;
-    /* Zawsze wypełnione na żółto, jeśli są */
-}
-
-.average-rating-stars span.empty {
-    color: #ccc;
-    /* Puste gwiazdki dla średniej */
-}
-
-/* Poprawki dla alertów, jeśli używane w formularzu komentarzy */
-.add-comment-form .alert {
-    margin-bottom: 1rem;
-}
-
-.add-comment-form .alert ul {
-    margin-bottom: 0;
-    padding-left: 1.2rem;
 }
