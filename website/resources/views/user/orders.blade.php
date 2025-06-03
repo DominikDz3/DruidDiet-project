@@ -19,11 +19,8 @@
                     <a href="{{ route('calculators.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('calculators.*') ? 'active-custom' : '' }}">
                         <i class="bi bi-calculator me-2"></i> Kalkulatory
                     </a>
-                    <a href="{{ route('user.totp.setup') }}" class="list-group-item list-group-item-action active-custom">
+                     <a href="{{ route('user.totp.manage') }}" class="list-group-item list-group-item-action {{ request()->routeIs('user.totp.manage') || request()->routeIs('user.totp.setup') ? 'active-custom' : '' }}">
                     <i class="bi bi-shield-lock me-2"></i> Uwierzytelnianie 2FA
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <i class="bi bi-gear me-2"></i> Ustawienia konta
                     </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -49,7 +46,7 @@
                                         <th scope="col">Data Zamówienia</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Suma</th>
-                                        <th scope="col">Akcje</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -69,11 +66,7 @@
                                                 </span>
                                             </td>
                                             <td>{{ number_format($order->total_price, 2, ',', ' ') }} zł</td>
-                                            <td>
-                                                {{-- Możesz tu dodać link do szczegółów zamówienia --}}
-                                                {{-- <a href="{{ route('user.orders.show', $order->order_id) }}" class="btn btn-sm btn-outline-primary">Szczegóły</a> --}}
-                                                <button class="btn btn-sm btn-outline-primary" disabled>Szczegóły (wkrótce)</button>
-                                            </td>
+                                            
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -22,9 +22,7 @@
                 <a href="{{ route('user.totp.manage') }}" class="list-group-item list-group-item-action active-custom"> {{-- Ten link powinien być teraz aktywny --}}
                     <i class="bi bi-shield-lock me-2"></i> Uwierzytelnianie 2FA
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                        <i class="bi bi-gear me-2"></i> Ustawienia konta
-                </a>
+                
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="list-group-item list-group-item-action text-danger">
