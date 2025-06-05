@@ -112,7 +112,8 @@ Do uruchomienia aplikacji lokalnie niezbędne jest posiadanie zainstalowanego i 
 Schemat bazy danych został zaprojektowany w celu efektywnego przechowywania informacji o użytkownikach, ich zamówieniach, dostępnych cateringach, dietach, kuponach, komentarzach oraz wynikach BMI. Poniżej znajduje się diagram ERD ilustrujący kluczowe tabele i relacje między nimi.
    
 
-   ![[docs-img/diagram-export-3.06.2025-19_51_26.png]]
+[diagram-export-3 06 2025-19_51_26](https://github.com/user-attachments/assets/dfd93300-ea81-4e00-93bc-fbcd2cfe8a8d)
+
    
    
 # Opis Widoków
@@ -121,7 +122,8 @@ Schemat bazy danych został zaprojektowany w celu efektywnego przechowywania inf
 ## Strona główna
 
 
-![[docs-img/main.png]]
+
+![main](https://github.com/user-attachments/assets/3f6b3c44-4eaa-4040-bee5-dcadad7af799)
 
 
 ### **Opis Strony Głównej (`main`)**
@@ -178,9 +180,7 @@ Strona główna aplikacji DruidDiet pełni rolę wizytówki oraz dynamicznego ce
 # Sekcja Diety
 
 
-
-
-![[docs_img/diets.png]]
+![diets](https://github.com/user-attachments/assets/2c83f73f-44e8-4f5c-8f53-1538561f45d2)
 
 ### **Opis Widoku Listy Diet (`diets.index`)**
 
@@ -229,8 +229,8 @@ Widok `diets.index` jest kluczową stroną publiczną aplikacji, która prezentu
 
  
 #  Cateringi
-  ![[docs-img/caterings.png]]
-  
+  ![caterings](https://github.com/user-attachments/assets/3b54f877-4dca-480d-9b99-f65e10aabfb8)
+
   
 ### **Opis Widoku Listy Cateringów (`caterings.index`)**
 
@@ -276,7 +276,8 @@ Widok `caterings.index` to strona prezentująca pełną ofertę cateringową apl
   # Strefa Dostaw 
   
   
-  ![[docs-img/delivery_cart.png]]
+![delivery_cart](https://github.com/user-attachments/assets/59ed0f4a-1c87-414e-ae62-c77c1539fe6d)
+
   
   Strona Strefy dostaw składa się z mapy strefy dostaw. 
   
@@ -285,7 +286,8 @@ Widok `caterings.index` to strona prezentująca pełną ofertę cateringową apl
   
   # Koszyk
   
-  ![[docs-img/cart.png]]
+
+![cart](https://github.com/user-attachments/assets/4b615e32-b03f-4a98-85ac-1b373c0227b3)
 
 
 ### **Opis Widoku Koszyka (`cart.index`)**
@@ -338,9 +340,10 @@ Widok koszyka jest kluczowym elementem procesu zakupowego w aplikacji DruidDiet.
   # Panel użytkownika
 
 
+![user_main](https://github.com/user-attachments/assets/46664ed8-2b59-4b8b-9653-2e8970fce23c)
 
   
-  ![[docs-img/user_main.png]]
+
   
   
 ### **Opis Widoku Głównego Panelu Użytkownika (`user.dashboard`)**
@@ -374,7 +377,8 @@ Główny widok panelu użytkownika (`user.dashboard`) jest centralnym punktem za
   
 # Panel Administartora
 
-![[docs-img/admin_main.png]]
+![admin_main](https://github.com/user-attachments/assets/1399409a-9961-41df-a4d5-d5bdf28189dd)
+
 ### **Opis Panelu Administratora**
 
 Panel administratora aplikacji DruidDiet to kompleksowe centrum zarządzania, które umożliwia pełną kontrolę nad kluczowymi aspektami działania serwisu. Interfejs został zaprojektowany w sposób czysty i funkcjonalny, aby zapewnić efektywną pracę i szybki dostęp do wszystkich modułów.
@@ -444,10 +448,10 @@ Panel administratora aplikacji DruidDiet to kompleksowe centrum zarządzania, kt
         
     - Główną akcją jest możliwość usunięcia nieodpowiedniego komentarza. 
   
-  # Prezentacja działania trybu Dark-Mode na przykładzie strony cateringów
+# Prezentacja działania trybu Dark-Mode na przykładzie strony cateringów
   
-  ![[docs-img/darkmode_presentation.png]]
-  
-  
+
+  ![darkmode_presentation](https://github.com/user-attachments/assets/f19e56b6-25fa-4049-9862-6f329283faf1)
+
   
   
