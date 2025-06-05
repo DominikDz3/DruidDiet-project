@@ -1,7 +1,7 @@
 Zespół opracowujący projekt
-Jakub Czesnak 
-Dominik Dziadosz
-Julia Chmura
+Jakub Czesnak,  
+Dominik Dziadosz, 
+Julia Chmura, 
 Bartłomiej Dobranowski 
 
 Link do repozytorium:
@@ -121,7 +121,7 @@ Schemat bazy danych został zaprojektowany w celu efektywnego przechowywania inf
 ## Strona główna
 
 
-![[main.png]]
+![[docs-img/main.png]]
 
 
 ### **Opis Strony Głównej (`main`)**
@@ -180,7 +180,7 @@ Strona główna aplikacji DruidDiet pełni rolę wizytówki oraz dynamicznego ce
 
 
 
-![[diets.png]]
+![[docs_img/diets.png]]
 
 ### **Opis Widoku Listy Diet (`diets.index`)**
 
@@ -229,7 +229,7 @@ Widok `diets.index` jest kluczową stroną publiczną aplikacji, która prezentu
 
  
 #  Cateringi
-  ![[caterings.png]]
+  ![[docs-img/caterings.png]]
   
   
 ### **Opis Widoku Listy Cateringów (`caterings.index`)**
@@ -276,7 +276,7 @@ Widok `caterings.index` to strona prezentująca pełną ofertę cateringową apl
   # Strefa Dostaw 
   
   
-  ![[delivery_cart.png]]
+  ![[docs-img/delivery_cart.png]]
   
   Strona Strefy dostaw składa się z mapy strefy dostaw. 
   
@@ -285,7 +285,7 @@ Widok `caterings.index` to strona prezentująca pełną ofertę cateringową apl
   
   # Koszyk
   
-  ![[cart.png]]
+  ![[docs-img/cart.png]]
 
 
 ### **Opis Widoku Koszyka (`cart.index`)**
@@ -340,7 +340,7 @@ Widok koszyka jest kluczowym elementem procesu zakupowego w aplikacji DruidDiet.
 
 
   
-  ![[user_main.png]]
+  ![[docs-img/user_main.png]]
   
   
 ### **Opis Widoku Głównego Panelu Użytkownika (`user.dashboard`)**
@@ -374,7 +374,7 @@ Główny widok panelu użytkownika (`user.dashboard`) jest centralnym punktem za
   
 # Panel Administartora
 
-![[admin_main.png]]
+![[docs-img/admin_main.png]]
 ### **Opis Panelu Administratora**
 
 Panel administratora aplikacji DruidDiet to kompleksowe centrum zarządzania, które umożliwia pełną kontrolę nad kluczowymi aspektami działania serwisu. Interfejs został zaprojektowany w sposób czysty i funkcjonalny, aby zapewnić efektywną pracę i szybki dostęp do wszystkich modułów.
@@ -446,7 +446,7 @@ Panel administratora aplikacji DruidDiet to kompleksowe centrum zarządzania, kt
   
   # Prezentacja działania trybu Dark-Mode na przykładzie strony cateringów
   
-  ![[darkmode_presentation.png]]
+  ![[docs-img/darkmode_presentation.png]]
   
   
   
