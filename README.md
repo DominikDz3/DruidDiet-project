@@ -112,7 +112,7 @@ Do uruchomienia aplikacji lokalnie niezbędne jest posiadanie zainstalowanego i 
 Schemat bazy danych został zaprojektowany w celu efektywnego przechowywania informacji o użytkownikach, ich zamówieniach, dostępnych cateringach, dietach, kuponach, komentarzach oraz wynikach BMI. Poniżej znajduje się diagram ERD ilustrujący kluczowe tabele i relacje między nimi.
    
 
-[diagram-export-3 06 2025-19_51_26](https://github.com/user-attachments/assets/dfd93300-ea81-4e00-93bc-fbcd2cfe8a8d)
+![diagram-export-3 06 2025-19_51_26](https://github.com/user-attachments/assets/dfd93300-ea81-4e00-93bc-fbcd2cfe8a8d)
 
    
    
